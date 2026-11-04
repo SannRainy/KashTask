@@ -1,0 +1,202 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg-default);
+}
+
+/* ── Desktop Sidebar ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-elevated);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.logo {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.sidebarNav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) var(--space-2);
+  gap: var(--space-1);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  transition:
+    background var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default);
+}
+
+.navItem:hover {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.navItem.active {
+  background: color-mix(in srgb, var(--color-accent-default) 12%, transparent);
+  color: var(--color-accent-default);
+  font-weight: var(--font-weight-semibold);
+}
+
+.navItem:focus-visible {
+  outline: 2px solid var(--color-accent-default);
+  outline-offset: 2px;
+}
+
+.navIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.navItem.active .navIcon {
+  opacity: 1;
+}
+
+.sidebarFooter {
+  padding: var(--space-3) var(--space-2) var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* ── Main content ── */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Top bar (shown on mobile only via CSS) ── */
+.topBar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-elevated);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+.topBarLogo {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+/* ── Bottom Nav (mobile) ── */
+.bottomNav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-bg-elevated);
+  border-top: 1px solid var(--color-border-subtle);
+  z-index: var(--z-sticky);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.bottomNavInner {
+  display: flex;
+  align-items: stretch;
+}
+
+.bottomNavItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-1);
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: color var(--duration-fast) var(--ease-default);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottomNavItem.active {
+  color: var(--color-accent-default);
+}
+
+.bottomNavItem:focus-visible {
+  outline: 2px solid var(--color-accent-default);
+  outline-offset: -2px;
+}
+
+.bottomNavIcon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Mobile content gets bottom padding for the fixed nav */
+.mainContentMobile {
+  padding-bottom: 72px;
+}
+
+/* ── Responsive breakpoint ── */
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+
+  .topBar {
+    display: flex;
+  }
+
+  .bottomNav {
+    display: block;
+  }
+
+  .main {
+    padding-bottom: 0;
+  }
+}
