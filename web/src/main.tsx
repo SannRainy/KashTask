@@ -5,9 +5,19 @@ import { App } from '@app/App';
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   );
+
+  // In development, run real-time accessibility auditing via axe-core
+  if (import.meta.env.DEV) {
+    import('@axe-core/react')
+      .then((axe) => {
+        axe.default(React, ReactDOM, 1000);
+      })
+      .catch(() => {});
+  }
 }

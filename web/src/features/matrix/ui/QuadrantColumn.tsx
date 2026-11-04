@@ -86,7 +86,10 @@ export function QuadrantColumn({
 
       {/* Sortable Task List */}
       <SortableContext items={itemIds} strategy={verticalListSortingStrategy}>
-        <div className={styles.tasksList} role="list">
+        <div
+          className={styles.tasksList}
+          role={tasks.length > 0 ? 'list' : undefined}
+        >
           {tasks.length === 0 ? (
             <div className={styles.emptyState}>
               <span>No tasks here</span>

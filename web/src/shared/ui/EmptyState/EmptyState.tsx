@@ -9,6 +9,8 @@ export interface EmptyStateProps {
   /** Optional action (e.g. a Button). */
   action?: React.ReactNode;
   className?: string;
+  /** Heading level for semantic hierarchy (default: 'h2'). */
+  headingLevel?: 'h2' | 'h3';
 }
 
 export function EmptyState({
@@ -17,7 +19,10 @@ export function EmptyState({
   description,
   action,
   className,
+  headingLevel = 'h2',
 }: EmptyStateProps) {
+  const HeadingTag = headingLevel;
+
   return (
     <div
       className={[styles.emptyState, className ?? ''].filter(Boolean).join(' ')}
@@ -29,7 +34,7 @@ export function EmptyState({
           {icon}
         </div>
       )}
-      <h3 className={styles.title}>{title}</h3>
+      <HeadingTag className={styles.title}>{title}</HeadingTag>
       {description && <p className={styles.description}>{description}</p>}
       {action && <div className={styles.action}>{action}</div>}
     </div>

@@ -13,6 +13,7 @@ import { AppShell } from './AppShell';
 import { ErrorBoundary } from './ErrorBoundary';
 import { NotFoundPage } from './NotFoundPage';
 import { KeyboardHelpDialog } from './KeyboardHelpDialog';
+import { UpdatePrompt } from './UpdatePrompt';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import './reset.css';
 import '../core/theme/tokens.css';
@@ -295,6 +296,7 @@ function AppContent() {
     <AppShell currentPath={currentPath} onNavigate={navigate}>
       <ErrorBoundary>{renderPage()}</ErrorBoundary>
       <KeyboardHelpDialog open={helpOpen} onClose={() => setHelpOpen(false)} />
+      <UpdatePrompt />
     </AppShell>
   );
 }
