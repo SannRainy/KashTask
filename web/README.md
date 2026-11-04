@@ -111,3 +111,4 @@ pnpm preview
 - <kbd>g</kbd> lalu <kbd>s</kbd> : Berpindah ke halaman **Stats**
 - <kbd>?</kbd> : Membuka dialog bantuan pintasan keyboard
 - <kbd>Esc</kbd> : Menutup dialog yang aktif
+
