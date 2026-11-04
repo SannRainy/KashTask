@@ -1,0 +1,115 @@
+.page {
+  flex: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.filterTabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.tabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-standard);
+}
+
+.tabBtn:hover {
+  color: var(--color-text-primary);
+}
+
+.tabBtnActive {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.countBadge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+}
+
+:root[data-theme='dark'] .countBadge {
+  background-color: var(--color-neutral-800);
+  color: var(--color-neutral-300);
+}
+
+.tabBtnActive .countBadge {
+  background-color: var(--color-accent-100);
+  color: var(--color-accent-700);
+}
+
+:root[data-theme='dark'] .tabBtnActive .countBadge {
+  background-color: rgba(99, 102, 241, 0.25);
+  color: var(--color-accent-300);
+}
+
+.habitsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.undoToastAction {
+  background: transparent;
+  border: none;
+  color: var(--color-accent-300, #a5b4fc);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: var(--space-2);
+  padding: 0;
+}

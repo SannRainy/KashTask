@@ -1,0 +1,125 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.subtext {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.segmentedControl {
+  display: flex;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-bg-surface);
+}
+
+.segmentBtn {
+  flex: 1;
+  padding: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.segmentBtnActive {
+  background-color: var(--color-accent-600);
+  color: white;
+}
+
+:root[data-theme='dark'] .segmentBtnActive {
+  background-color: var(--color-accent-500);
+  color: var(--color-neutral-950);
+}
+
+.weekdayGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+}
+
+.dayToggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-standard);
+}
+
+.dayToggleActive {
+  border-color: var(--color-accent-500);
+  background-color: var(--color-accent-50);
+  color: var(--color-accent-600);
+}
+
+:root[data-theme='dark'] .dayToggleActive {
+  background-color: rgba(99, 102, 241, 0.2);
+  color: var(--color-accent-300);
+}
+
+.colorPicker {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.colorSwatch {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.colorSwatch:hover {
+  transform: scale(1.1);
+}
+
+.colorSwatchSelected {
+  box-shadow:
+    0 0 0 2px var(--color-bg-elevated),
+    0 0 0 4px var(--color-text-primary);
+}
+
+.errorText {
+  font-size: var(--font-size-xs);
+  color: var(--color-danger, #ef4444);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
