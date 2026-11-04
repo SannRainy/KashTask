@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
   padding: var(--space-8) var(--space-4);
   gap: var(--space-8);
@@ -10,10 +10,10 @@
 }
 
 .pageTitle {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   margin-bottom: var(--space-1);
 }
 
@@ -21,15 +21,20 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
 }
 
 .sectionTitle {
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
-  padding-bottom: var(--space-2);
+  padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
@@ -49,7 +54,7 @@
 
 .rowLabelText {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
 }
 
@@ -64,14 +69,14 @@
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-surface);
 }
 
 .segmentBtn {
   border: none;
   background: transparent;
   padding: var(--space-2) var(--space-4);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   color: var(--color-text-secondary);
@@ -104,7 +109,7 @@
 
 .dataRowTitle {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
 }
 
@@ -120,20 +125,21 @@
 
 .dangerZone {
   border: 1px solid var(--color-quadrant-eliminate-border, #fca5a5);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  background-color: var(--color-error-bg);
 }
 
 .dangerTitle {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-error);
 }
 
 .dangerDesc {
   font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }

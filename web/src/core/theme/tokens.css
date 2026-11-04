@@ -1,12 +1,11 @@
 /*
  * KashTask Design Tokens
- * CSS Custom Properties for light and dark themes.
- * WCAG AA compliant contrast ratios (≥4.5:1 for normal text, ≥3:1 for large text).
+ * Ultra-Modern Minimalist Dark & Light Theme (Inspired by Runagent / Linear / Dribbble)
+ * Precision micro-borders, deep obsidian matte surfaces, glowing accents, perfect hierarchy.
  */
 
-/* ─── Static (theme-agnostic) tokens ───────────────────────────────────── */
 :root {
-  /* Spacing scale — 4px base */
+  /* ── Spacing scale ── */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -18,42 +17,56 @@
   --space-12: 48px;
   --space-16: 64px;
 
-  /* Border radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  /* ── Precision Border radius ── */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
   --radius-full: 9999px;
 
-  /* Typography — font sizes */
-  --font-size-xs: 0.75rem; /* 12px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-base: 1rem; /* 16px */
-  --font-size-lg: 1.125rem; /* 18px */
-  --font-size-xl: 1.25rem; /* 20px */
-  --font-size-2xl: 1.5rem; /* 24px */
-  --font-size-3xl: 1.875rem; /* 30px */
+  /* ── Typography — font families ── */
+  --font-sans:
+    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 
-  /* Typography — font weights */
+  /* ── Typography — font sizes ── */
+  --font-size-2xs: 0.6875rem; /* 11px */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 2rem;      /* 32px */
+  --font-size-4xl: 2.75rem;   /* 44px */
+
+  /* ── Typography — font weights ── */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
-  /* Typography — line heights */
-  --line-height-tight: 1.25;
+  /* ── Typography — line heights ── */
+  --line-height-tight: 1.2;
   --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  --line-height-relaxed: 1.65;
 
-  /* Motion */
-  --duration-fast: 100ms;
-  --duration-normal: 200ms;
-  --duration-slow: 300ms;
-  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  /* ── Motion & transitions ── */
+  --duration-fast: 140ms;
+  --duration-normal: 220ms;
+  --duration-slow: 350ms;
+  --easing-standard: cubic-bezier(0.16, 1, 0.3, 1);
   --easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
   --easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-default: var(--easing-standard);
 
-  /* Z-index scale */
+  /* ── Z-index scale ── */
   --z-dropdown: 100;
   --z-sticky: 200;
   --z-overlay: 300;
@@ -61,15 +74,127 @@
   --z-toast: 500;
 }
 
-/* ─── Light theme ───────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────────────────
+   Default & Dark Theme: Pure Obsidian Matte Canvas (#0b0c0e) with Soft Violet/Indigo Accent
+   ────────────────────────────────────────────────────────────────────────── */
 :root,
+:root[data-theme='dark'] {
+  --color-neutral-50: #07080a;
+  --color-neutral-100: #0e1013;
+  --color-neutral-200: #14171c;
+  --color-neutral-300: #1c2027;
+  --color-neutral-400: #2b313c;
+  --color-neutral-500: #525c6e;
+  --color-neutral-600: #8895aa;
+  --color-neutral-700: #b5c0d0;
+  --color-neutral-800: #e2e8f0;
+  --color-neutral-900: #f1f5f9;
+  --color-neutral-950: #ffffff;
+
+  /* Accent: Neon Violet / Indigo with vibrant glow */
+  --color-accent-50: #1a153b;
+  --color-accent-100: #291e60;
+  --color-accent-200: #3c2a91;
+  --color-accent-300: #553cc7;
+  --color-accent-400: #7053f3;
+  --color-accent-500: #8b6ff9;
+  --color-accent-600: #a792fb;
+  --color-accent-700: #c4b5fd;
+  --color-accent-800: #ddd6fe;
+  --color-accent-900: #f5f3ff;
+  --color-accent-glow: rgba(139, 111, 249, 0.3);
+
+  /* Surfaces & canvas */
+  --bg-app-gradient: radial-gradient(circle at 50% 0%, #151821 0%, #0b0c0e 70%);
+  --color-bg-primary: #0b0c0e;
+  --color-bg-secondary: #121419;
+  --color-bg-surface: #14171d;
+  --color-bg-elevated: #161922;
+  --color-bg-overlay: rgba(5, 6, 8, 0.75);
+
+  /* Glassmorphism tokens */
+  --glass-bg: rgba(18, 20, 26, 0.85);
+  --glass-bg-elevated: rgba(22, 25, 34, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-highlight: rgba(255, 255, 255, 0.16);
+  --glass-blur: blur(20px);
+  --card-bg: #13161d;
+  --card-hover-bg: #181c25;
+
+  /* Quadrant colors: Clean glowing indicator tones */
+  --color-quadrant-do: #f43f5e;
+  --color-quadrant-do-bg: rgba(244, 63, 94, 0.12);
+  --color-quadrant-do-border: rgba(244, 63, 94, 0.3);
+  --color-quadrant-do-text: #fda4af;
+
+  --color-quadrant-schedule: #f59e0b;
+  --color-quadrant-schedule-bg: rgba(245, 158, 11, 0.12);
+  --color-quadrant-schedule-border: rgba(245, 158, 11, 0.3);
+  --color-quadrant-schedule-text: #fde68a;
+
+  --color-quadrant-delegate: #38bdf8;
+  --color-quadrant-delegate-bg: rgba(56, 189, 248, 0.12);
+  --color-quadrant-delegate-border: rgba(56, 189, 248, 0.3);
+  --color-quadrant-delegate-text: #bae6fd;
+
+  --color-quadrant-eliminate: #94a3b8;
+  --color-quadrant-eliminate-bg: rgba(148, 163, 184, 0.1);
+  --color-quadrant-eliminate-border: rgba(148, 163, 184, 0.22);
+  --color-quadrant-eliminate-text: #cbd5e1;
+
+  /* Typography */
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #626f84;
+  --color-text-inverse: #0b0c0e;
+  --color-text-on-accent: #ffffff;
+
+  /* Borders */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-subtle: rgba(255, 255, 255, 0.04);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-border-focus: var(--color-accent-400);
+
+  /* Interactive accent */
+  --color-accent-default: #8b6ff9;
+  --color-accent-hover: #9d85fa;
+  --color-accent-active: #7053f3;
+  --color-accent-subtle: rgba(139, 111, 249, 0.14);
+  --color-accent-subtle-hover: rgba(139, 111, 249, 0.22);
+
+  /* Status / feedback */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.14);
+  --color-success-border: rgba(16, 185, 129, 0.3);
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.14);
+  --color-warning-border: rgba(245, 158, 11, 0.3);
+  --color-error: #f43f5e;
+  --color-error-bg: rgba(244, 63, 94, 0.14);
+  --color-error-border: rgba(244, 63, 94, 0.3);
+  --color-info: #38bdf8;
+  --color-info-bg: rgba(56, 189, 248, 0.14);
+  --color-info-border: rgba(56, 189, 248, 0.3);
+
+  /* Precision shadows & inner card highlights */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.85);
+  --shadow-xl: 0 24px 60px -10px rgba(0, 0, 0, 0.95);
+  --shadow-glow: 0 0 24px var(--color-accent-glow);
+
+  --theme-color: #0b0c0e;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Light Theme: Clean high-end SaaS Editorial Palette
+   ────────────────────────────────────────────────────────────────────────── */
 :root[data-theme='light'] {
-  /* Neutral palette */
-  --color-neutral-50: #f8fafc;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
+  --color-neutral-50: #fcfcfd;
+  --color-neutral-100: #f4f5f8;
+  --color-neutral-200: #e9ecf2;
+  --color-neutral-300: #d8deeb;
+  --color-neutral-400: #9da8be;
   --color-neutral-500: #64748b;
   --color-neutral-600: #475569;
   --color-neutral-700: #334155;
@@ -77,198 +202,96 @@
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
 
-  /* Accent — Indigo (single accent colour) */
-  --color-accent-50: #eef2ff;
-  --color-accent-100: #e0e7ff;
-  --color-accent-200: #c7d2fe;
-  --color-accent-300: #a5b4fc;
-  --color-accent-400: #818cf8;
-  --color-accent-500: #6366f1;
-  --color-accent-600: #4f46e5;
-  --color-accent-700: #4338ca;
-  --color-accent-800: #3730a3;
-  --color-accent-900: #312e81;
+  /* Accent: Clean Electric Violet */
+  --color-accent-50: #f5f3ff;
+  --color-accent-100: #ede9fe;
+  --color-accent-200: #ddd6fe;
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #7c3aed;
+  --color-accent-600: #6d28d9;
+  --color-accent-700: #5b21b6;
+  --color-accent-800: #4c1d95;
+  --color-accent-900: #2e1065;
+  --color-accent-glow: rgba(124, 58, 237, 0.2);
 
-  /*
-   * Quadrant colours — calm/muted, distinguishable in both themes.
-   * DO (urgent+important):       Red/rose, muted
-   * SCHEDULE (important):        Amber/yellow, muted
-   * DELEGATE (urgent):           Blue, muted
-   * ELIMINATE (neither):         Slate, muted
-   */
-  --color-quadrant-do: #fca5a5; /* rose-300  — contrast OK on light bg */
-  --color-quadrant-do-bg: #fff1f2; /* rose-50   */
-  --color-quadrant-do-border: #fecdd3; /* rose-200  */
-  --color-quadrant-do-text: #9f1239; /* rose-800  — 7.1:1 on white */
-
-  --color-quadrant-schedule: #fcd34d; /* amber-300 */
-  --color-quadrant-schedule-bg: #fffbeb; /* amber-50  */
-  --color-quadrant-schedule-border: #fde68a; /* amber-200 */
-  --color-quadrant-schedule-text: #92400e; /* amber-800 — 7.3:1 on white */
-
-  --color-quadrant-delegate: #93c5fd; /* blue-300  */
-  --color-quadrant-delegate-bg: #eff6ff; /* blue-50   */
-  --color-quadrant-delegate-border: #bfdbfe; /* blue-200 */
-  --color-quadrant-delegate-text: #1e40af; /* blue-800 — 8.6:1 on white */
-
-  --color-quadrant-eliminate: #cbd5e1; /* slate-300 */
-  --color-quadrant-eliminate-bg: #f8fafc; /* slate-50  */
-  --color-quadrant-eliminate-border: #e2e8f0; /* slate-200 */
-  --color-quadrant-eliminate-text: #334155; /* slate-700 — 7.9:1 on white */
-
-  /* Semantic surface tokens */
-  --color-bg-primary: var(--color-neutral-50);
-  --color-bg-secondary: var(--color-neutral-100);
+  /* Surfaces & canvas */
+  --bg-app-gradient: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  --color-bg-primary: #f8fafc;
+  --color-bg-secondary: #f1f5f9;
+  --color-bg-surface: #ffffff;
   --color-bg-elevated: #ffffff;
-  --color-bg-overlay: rgba(15, 23, 42, 0.5);
+  --color-bg-overlay: rgba(15, 23, 42, 0.4);
 
-  /* Semantic text tokens */
-  --color-text-primary: var(--color-neutral-900); /* ~19:1 on bg-primary */
-  --color-text-secondary: var(--color-neutral-600); /* ~6.1:1 on bg-primary */
-  --color-text-muted: var(--color-neutral-500); /* ~4.5:1 on bg-primary */
-  --color-text-inverse: var(--color-neutral-50);
+  /* Glassmorphism tokens */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-border-highlight: rgba(15, 23, 42, 0.12);
+  --glass-blur: blur(20px);
+  --card-bg: #ffffff;
+  --card-hover-bg: #fafbfc;
+
+  /* Quadrant colors */
+  --color-quadrant-do: #e11d48;
+  --color-quadrant-do-bg: rgba(225, 29, 72, 0.06);
+  --color-quadrant-do-border: rgba(225, 29, 72, 0.2);
+  --color-quadrant-do-text: #9f1239;
+
+  --color-quadrant-schedule: #d97706;
+  --color-quadrant-schedule-bg: rgba(217, 119, 6, 0.08);
+  --color-quadrant-schedule-border: rgba(217, 119, 6, 0.22);
+  --color-quadrant-schedule-text: #92400e;
+
+  --color-quadrant-delegate: #0284c7;
+  --color-quadrant-delegate-bg: rgba(2, 132, 199, 0.07);
+  --color-quadrant-delegate-border: rgba(2, 132, 199, 0.2);
+  --color-quadrant-delegate-text: #075985;
+
+  --color-quadrant-eliminate: #64748b;
+  --color-quadrant-eliminate-bg: rgba(100, 116, 139, 0.06);
+  --color-quadrant-eliminate-border: rgba(100, 116, 139, 0.18);
+  --color-quadrant-eliminate-text: #334155;
+
+  /* Typography */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #8292a8;
+  --color-text-inverse: #ffffff;
   --color-text-on-accent: #ffffff;
 
-  /* Semantic border tokens */
-  --color-border-default: var(--color-neutral-200);
-  --color-border-subtle: var(--color-neutral-100);
-  --color-border-strong: var(--color-neutral-300);
+  /* Borders */
+  --color-border-default: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+  --color-border-strong: #cbd5e1;
   --color-border-focus: var(--color-accent-500);
 
-  /* Interactive accent tokens */
-  --color-accent-default: var(--color-accent-600);
-  --color-accent-hover: var(--color-accent-700);
-  --color-accent-active: var(--color-accent-800);
-  --color-accent-subtle: var(--color-accent-50);
-  --color-accent-subtle-hover: var(--color-accent-100);
+  /* Interactive accent */
+  --color-accent-default: #7c3aed;
+  --color-accent-hover: #6d28d9;
+  --color-accent-active: #5b21b6;
+  --color-accent-subtle: rgba(124, 58, 237, 0.08);
+  --color-accent-subtle-hover: rgba(124, 58, 237, 0.14);
 
   /* Status / feedback */
-  --color-success: #16a34a; /* green-600 — 5.9:1 on white */
-  --color-success-bg: #f0fdf4;
-  --color-success-border: #bbf7d0;
-  --color-warning: #d97706; /* amber-600 — 4.6:1 on white */
+  --color-success: #10b981;
+  --color-success-bg: #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-warning: #f59e0b;
   --color-warning-bg: #fffbeb;
   --color-warning-border: #fde68a;
-  --color-error: #dc2626; /* red-600   — 5.9:1 on white */
+  --color-error: #ef4444;
   --color-error-bg: #fef2f2;
   --color-error-border: #fecaca;
-  --color-info: var(--color-accent-600);
-  --color-info-bg: var(--color-accent-50);
-  --color-info-border: var(--color-accent-200);
+  --color-info: #0284c7;
+  --color-info-bg: #f0f9ff;
+  --color-info-border: #bae6fd;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
-  --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-  --shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.08);
+  --shadow-xl: 0 24px 48px -12px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
 
-  /* Meta colour for browser chrome */
-  --theme-color: var(--color-neutral-50);
-}
-
-/* ─── Dark theme ────────────────────────────────────────────────────────── */
-:root[data-theme='dark'] {
-  /* Neutral palette — same names, dark-mapped values */
-  --color-neutral-50: #020617;
-  --color-neutral-100: #0f172a;
-  --color-neutral-200: #1e293b;
-  --color-neutral-300: #334155;
-  --color-neutral-400: #475569;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #94a3b8;
-  --color-neutral-700: #cbd5e1;
-  --color-neutral-800: #e2e8f0;
-  --color-neutral-900: #f1f5f9;
-  --color-neutral-950: #f8fafc;
-
-  /* Accent — Indigo in dark context */
-  --color-accent-50: #312e81;
-  --color-accent-100: #3730a3;
-  --color-accent-200: #4338ca;
-  --color-accent-300: #4f46e5;
-  --color-accent-400: #6366f1;
-  --color-accent-500: #818cf8;
-  --color-accent-600: #a5b4fc;
-  --color-accent-700: #c7d2fe;
-  --color-accent-800: #e0e7ff;
-  --color-accent-900: #eef2ff;
-
-  /*
-   * Quadrant colours — dark variants, same calm/muted intent.
-   * Text colours ensure ≥4.5:1 contrast against dark backgrounds.
-   */
-  --color-quadrant-do: #f87171; /* rose-400  */
-  --color-quadrant-do-bg: #1c0a0a; /* very dark rose */
-  --color-quadrant-do-border: #7f1d1d; /* rose-900  */
-  --color-quadrant-do-text: #fca5a5; /* rose-300  — high contrast on dark bg */
-
-  --color-quadrant-schedule: #fbbf24; /* amber-400 */
-  --color-quadrant-schedule-bg: #1c1407; /* very dark amber */
-  --color-quadrant-schedule-border: #78350f; /* amber-900 */
-  --color-quadrant-schedule-text: #fcd34d; /* amber-300 */
-
-  --color-quadrant-delegate: #60a5fa; /* blue-400  */
-  --color-quadrant-delegate-bg: #07131c; /* very dark blue */
-  --color-quadrant-delegate-border: #1e3a5f; /* blue-900 */
-  --color-quadrant-delegate-text: #93c5fd; /* blue-300  */
-
-  --color-quadrant-eliminate: #94a3b8; /* slate-400 */
-  --color-quadrant-eliminate-bg: #0f172a; /* slate-900 */
-  --color-quadrant-eliminate-border: #334155; /* slate-700 */
-  --color-quadrant-eliminate-text: #cbd5e1; /* slate-300 */
-
-  /* Semantic surface tokens */
-  --color-bg-primary: #0f172a;
-  --color-bg-secondary: #1e293b;
-  --color-bg-elevated: #1e293b;
-  --color-bg-overlay: rgba(0, 0, 0, 0.6);
-
-  /* Semantic text tokens */
-  --color-text-primary: #f1f5f9; /* ~15:1 on bg-primary */
-  --color-text-secondary: #94a3b8; /* ~6.3:1 on bg-primary */
-  --color-text-muted: #64748b; /* ~4.5:1 on bg-primary */
-  --color-text-inverse: #0f172a;
-  --color-text-on-accent: #ffffff;
-
-  /* Semantic border tokens */
-  --color-border-default: #334155;
-  --color-border-subtle: #1e293b;
-  --color-border-strong: #475569;
-  --color-border-focus: #818cf8;
-
-  /* Interactive accent tokens */
-  --color-accent-default: #818cf8;
-  --color-accent-hover: #a5b4fc;
-  --color-accent-active: #c7d2fe;
-  --color-accent-subtle: #1e1b4b;
-  --color-accent-subtle-hover: #312e81;
-
-  /* Status / feedback */
-  --color-success: #4ade80; /* green-400 — 8.1:1 on dark bg */
-  --color-success-bg: #052e16;
-  --color-success-border: #166534;
-  --color-warning: #fbbf24; /* amber-400 — 9.5:1 on dark bg */
-  --color-warning-bg: #1c1407;
-  --color-warning-border: #78350f;
-  --color-error: #f87171; /* red-400   — 6.1:1 on dark bg */
-  --color-error-bg: #1c0a0a;
-  --color-error-border: #7f1d1d;
-  --color-info: #818cf8;
-  --color-info-bg: #1e1b4b;
-  --color-info-border: #3730a3;
-
-  /* Shadows — more pronounced on dark backgrounds */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-  --shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-
-  /* Meta colour for browser chrome */
-  --theme-color: #0f172a;
+  --theme-color: #f8fafc;
 }

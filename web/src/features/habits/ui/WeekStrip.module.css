@@ -3,9 +3,10 @@
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-4);
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
 }
 
 .header {
@@ -16,8 +17,9 @@
 
 .monthLabel {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
+  letter-spacing: -0.01em;
 }
 
 .navControls {
@@ -30,19 +32,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-1) var(--space-2);
+  padding: 5px 12px;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
-  background: transparent;
+  background: var(--color-bg-surface);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color var(--duration-fast) var(--easing-standard);
+  transition: all var(--duration-fast) var(--easing-standard);
 }
 
 .navBtn:hover {
-  background-color: var(--color-bg-hover);
+  background: var(--color-neutral-200);
   color: var(--color-text-primary);
 }
 
@@ -50,20 +52,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-1) var(--space-3);
+  padding: 5px 14px;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-accent-600);
-  background: var(--color-accent-50);
-  border: 1px solid var(--color-accent-200);
-  border-radius: var(--radius-sm);
+  color: var(--color-accent-default);
+  background: var(--color-accent-subtle);
+  border: 1px solid var(--color-accent-subtle-hover);
+  border-radius: var(--radius-md);
   cursor: pointer;
+  transition: all var(--duration-fast) var(--easing-standard);
 }
 
-:root[data-theme='dark'] .todayBtn {
-  color: var(--color-accent-300);
-  background: rgba(99, 102, 241, 0.15);
-  border-color: rgba(99, 102, 241, 0.3);
+.todayBtn:hover {
+  background: var(--color-accent-subtle-hover);
 }
 
 .stripGrid {
@@ -77,65 +78,53 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-2) var(--space-1);
-  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-1);
+  background: var(--color-bg-surface);
   border: 1px solid var(--color-border-subtle);
-  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  transition:
-    transform var(--duration-fast) var(--easing-standard),
-    border-color var(--duration-fast) var(--easing-standard),
-    background-color var(--duration-fast) var(--easing-standard);
+  transition: all var(--duration-fast) var(--easing-standard);
+  position: relative;
+  min-height: 68px;
+  gap: 3px;
 }
 
 .dayCard:hover {
-  background-color: var(--color-bg-hover);
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .dayCardSelected {
-  border-color: var(--color-accent-500);
-  background-color: var(--color-accent-50);
+  border-color: var(--color-accent-default);
+  background: var(--color-accent-subtle);
+  box-shadow: 0 0 10px var(--color-accent-glow);
 }
 
-:root[data-theme='dark'] .dayCardSelected {
-  background-color: rgba(99, 102, 241, 0.2);
-  border-color: var(--color-accent-400);
+.dayCardToday::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-default);
 }
 
 .dayName {
-  font-size: var(--font-size-xs);
+  font-size: 11px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   text-transform: uppercase;
 }
 
-.dayCardSelected .dayName {
-  color: var(--color-accent-600);
-}
-
-:root[data-theme='dark'] .dayCardSelected .dayName {
-  color: var(--color-accent-300);
-}
-
-.dayNum {
-  font-size: var(--font-size-lg);
+.dayNumber {
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  margin-top: 2px;
 }
 
-.dayCardSelected .dayNum {
-  color: var(--color-accent-600);
-}
-
-:root[data-theme='dark'] .dayCardSelected .dayNum {
-  color: var(--color-accent-300);
-}
-
-.todayIndicator {
-  width: 5px;
-  height: 5px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-accent-500);
-  margin-top: var(--space-1);
+.dayRate {
+  font-size: 11px;
+  color: var(--color-text-muted);
 }

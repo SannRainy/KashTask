@@ -1,8 +1,8 @@
 /**
  * AppShell — responsive layout wrapper.
  *
- * Desktop (≥768px): sticky sidebar with nav + settings link.
- * Mobile (<768px):  sticky top bar + fixed bottom navigation.
+ * Desktop (≥768px): clean floating refined sidebar with nav + settings.
+ * Mobile (<768px):  sticky top bar + floating modern pill bottom nav.
  */
 import React from 'react';
 import { ThemeToggle } from '@shared/ui/ThemeToggle';
@@ -22,22 +22,20 @@ interface AppShellProps {
   children: React.ReactNode;
 }
 
-// ── SVG Icons ──────────────────────────────────────────────────────────────
-
 function IconHome() {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M3 12L12 3l9 9" />
-      <path d="M9 21V12h6v9" />
-      <rect x="3" y="12" width="18" height="9" rx="1" opacity="0" />
+      <path d="M3 10.5L12 3l9 7.5" />
+      <path d="M5 9v11a1 1 0 001 1h12a1 1 0 001-1V9" />
+      <path d="M9 21v-7h6v7" />
     </svg>
   );
 }
@@ -48,14 +46,13 @@ function IconTasks() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" />
-      <rect x="9" y="3" width="6" height="4" rx="1" />
-      <path d="M9 12l2 2 4-4" />
+      <path d="M9 6h11M9 12h11M9 18h11" />
+      <path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2" />
     </svg>
   );
 }
@@ -66,15 +63,15 @@ function IconMatrix() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <rect x="3" y="3" width="8" height="8" rx="1" />
-      <rect x="13" y="3" width="8" height="8" rx="1" />
-      <rect x="3" y="13" width="8" height="8" rx="1" />
-      <rect x="13" y="13" width="8" height="8" rx="1" />
+      <rect x="3" y="3" width="8" height="8" rx="2" />
+      <rect x="13" y="3" width="8" height="8" rx="2" />
+      <rect x="3" y="13" width="8" height="8" rx="2" />
+      <rect x="13" y="13" width="8" height="8" rx="2" />
     </svg>
   );
 }
@@ -85,13 +82,13 @@ function IconHabits() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-      <path d="M12 6v6l4 2" />
+      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+      <circle cx="12" cy="12" r="4" />
     </svg>
   );
 }
@@ -102,12 +99,13 @@ function IconStats() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
       <path d="M18 20V10M12 20V4M6 20v-6" />
+      <path d="M3 20h18" />
     </svg>
   );
 }
@@ -118,7 +116,7 @@ function IconSettings() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -129,17 +127,13 @@ function IconSettings() {
   );
 }
 
-// ── Nav items config ────────────────────────────────────────────────────────
-
 const PRIMARY_NAV: NavItem[] = [
-  { label: 'Overview', path: '/', icon: <IconHome />, shortcut: undefined },
+  { label: 'Overview', path: '/', icon: <IconHome />, shortcut: 'Esc' },
   { label: 'Tasks', path: '/tasks', icon: <IconTasks />, shortcut: 'g t' },
   { label: 'Matrix', path: '/matrix', icon: <IconMatrix />, shortcut: 'g m' },
   { label: 'Habits', path: '/habits', icon: <IconHabits />, shortcut: 'g h' },
   { label: 'Stats', path: '/stats', icon: <IconStats />, shortcut: 'g s' },
 ];
-
-// ── Component ───────────────────────────────────────────────────────────────
 
 export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
   const { mode, resolvedTheme, setMode } = useTheme();
@@ -154,20 +148,28 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
 
   return (
     <div className={styles.shell}>
+      {/* Subtle modern ambient artistic background layer */}
+      <div className={styles.ambientBackdrop} aria-hidden="true" />
+
       {/* Desktop Sidebar */}
       <aside className={styles.sidebar} aria-label="Main navigation">
         <div className={styles.sidebarHeader}>
           <a
             href="/"
             onClick={handleNav('/')}
-            className={styles.logo}
+            className={styles.brandLink}
             aria-label="KashTask home"
           >
-            KashTask
+            <div className={styles.brandLogoMark}>K</div>
+            <div className={styles.brandTextGroup}>
+              <span className={styles.logo}>KashTask</span>
+              <span className={styles.brandTagline}>Productivity Suite</span>
+            </div>
           </a>
         </div>
 
         <nav className={styles.sidebarNav}>
+          <span className={styles.navSectionLabel}>Workspace</span>
           {PRIMARY_NAV.map((item) => (
             <a
               key={item.path}
@@ -176,8 +178,13 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
               className={`${styles.navItem}${isActive(item.path) ? ` ${styles.active}` : ''}`}
               aria-current={isActive(item.path) ? 'page' : undefined}
             >
-              <span className={styles.navIcon}>{item.icon}</span>
-              {item.label}
+              <div className={styles.navItemContent}>
+                <span className={styles.navIcon}>{item.icon}</span>
+                <span>{item.label}</span>
+              </div>
+              {item.shortcut && (
+                <span className={styles.shortcutBadge}>{item.shortcut}</span>
+              )}
             </a>
           ))}
         </nav>
@@ -192,10 +199,12 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
                 currentPath === '/dev/components' ? 'page' : undefined
               }
             >
-              <span className={styles.navIcon}>
-                <IconStats />
-              </span>
-              UI Kit
+              <div className={styles.navItemContent}>
+                <span className={styles.navIcon}>
+                  <IconStats />
+                </span>
+                <span>UI Kit</span>
+              </div>
             </a>
           )}
           <a
@@ -204,40 +213,38 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
             className={`${styles.navItem}${isActive('/settings') ? ` ${styles.active}` : ''}`}
             aria-current={isActive('/settings') ? 'page' : undefined}
           >
-            <span className={styles.navIcon}>
-              <IconSettings />
-            </span>
-            Settings
+            <div className={styles.navItemContent}>
+              <span className={styles.navIcon}>
+                <IconSettings />
+              </span>
+              <span>Settings</span>
+            </div>
           </a>
-          <div
-            style={{
-              paddingLeft: 'var(--space-1)',
-              paddingTop: 'var(--space-2)',
-            }}
-          >
+          <div className={styles.themeToggleWrapper}>
             <ThemeToggle
               mode={mode}
               resolvedTheme={resolvedTheme}
               onModeChange={setMode}
+              showLabel
             />
           </div>
         </div>
       </aside>
 
-      {/* Main area */}
+      {/* Main content area */}
       <div className={styles.main}>
         {/* Mobile top bar */}
         <header className={styles.topBar}>
-          <a href="/" onClick={handleNav('/')} className={styles.topBarLogo}>
-            KashTask
-          </a>
-          <div
-            style={{
-              display: 'flex',
-              gap: 'var(--space-2)',
-              alignItems: 'center',
-            }}
+          <a
+            href="/"
+            onClick={handleNav('/')}
+            className={styles.topBarBrand}
+            aria-label="KashTask Home"
           >
+            <div className={styles.brandLogoMarkSmall}>K</div>
+            <span className={styles.topBarLogo}>KashTask</span>
+          </a>
+          <div className={styles.topBarActions}>
             <ThemeToggle
               mode={mode}
               resolvedTheme={resolvedTheme}
@@ -247,23 +254,19 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
               href="/settings"
               onClick={handleNav('/settings')}
               aria-label="Settings"
-              style={{
-                display: 'flex',
-                color: 'var(--color-text-secondary)',
-                padding: 'var(--space-1)',
-              }}
+              className={styles.mobileSettingsBtn}
             >
-              <span style={{ width: 20, height: 20 }}>
+              <span className={styles.mobileSettingsIcon}>
                 <IconSettings />
               </span>
             </a>
           </div>
         </header>
 
-        {/* Page content */}
+        {/* Page content wrapper */}
         <div className={styles.mainContentMobile}>{children}</div>
 
-        {/* Mobile bottom nav */}
+        {/* Mobile floating bottom nav bar */}
         <nav className={styles.bottomNav} aria-label="Mobile navigation">
           <div className={styles.bottomNavInner}>
             {PRIMARY_NAV.map((item) => (
@@ -276,7 +279,7 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
                 aria-label={item.label}
               >
                 <span className={styles.bottomNavIcon}>{item.icon}</span>
-                {item.label}
+                <span>{item.label}</span>
               </a>
             ))}
           </div>

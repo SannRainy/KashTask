@@ -3,7 +3,7 @@
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-8) var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -18,11 +18,11 @@
 }
 
 .title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
   color: var(--color-text-primary);
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
@@ -42,10 +42,10 @@
 .filterTabs {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 2px;
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   padding: 3px;
 }
 
@@ -53,13 +53,13 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-1) var(--space-3);
+  padding: 6px 14px;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
   border: none;
   background: transparent;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: all var(--duration-fast) var(--easing-standard);
 }
@@ -70,8 +70,9 @@
 
 .tabBtnActive {
   background-color: var(--color-bg-elevated);
-  color: var(--color-text-primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  color: var(--color-accent-default);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-sm);
 }
 
 .countBadge {
@@ -83,18 +84,13 @@
 }
 
 :root[data-theme='dark'] .countBadge {
-  background-color: var(--color-neutral-800);
-  color: var(--color-neutral-300);
+  background-color: var(--color-neutral-300);
+  color: var(--color-neutral-800);
 }
 
 .tabBtnActive .countBadge {
-  background-color: var(--color-accent-100);
-  color: var(--color-accent-700);
-}
-
-:root[data-theme='dark'] .tabBtnActive .countBadge {
-  background-color: rgba(99, 102, 241, 0.25);
-  color: var(--color-accent-300);
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent-default);
 }
 
 .habitsList {
@@ -106,7 +102,7 @@
 .undoToastAction {
   background: transparent;
   border: none;
-  color: var(--color-accent-300, #a5b4fc);
+  color: var(--color-accent-default);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   text-decoration: underline;

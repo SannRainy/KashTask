@@ -1,7 +1,7 @@
 .boardContainer {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
   width: 100%;
 }
 
@@ -10,9 +10,10 @@
   display: none;
   align-items: center;
   gap: var(--space-2);
-  padding: 2px;
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-md);
+  padding: 3px;
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
   overflow-x: auto;
 }
 
@@ -25,7 +26,7 @@
   padding: var(--space-2) var(--space-3);
   border: none;
   background: transparent;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
@@ -44,9 +45,9 @@
 }
 
 .mobileBadge {
-  font-size: 10px;
+  font-size: 11px;
   background-color: var(--color-bg-secondary);
-  padding: 0 var(--space-2);
+  padding: 1px var(--space-2);
   border-radius: var(--radius-full);
 }
 
@@ -54,7 +55,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
+  gap: var(--space-5);
   width: 100%;
 }
 
@@ -68,7 +69,6 @@
     grid-template-columns: 1fr;
   }
 
-  /* When on mobile, only show the active quadrant tab's column */
   .grid[data-active-mobile='DO']
     > section:not([data-testid='quadrant-column-DO']),
   .grid[data-active-mobile='SCHEDULE']

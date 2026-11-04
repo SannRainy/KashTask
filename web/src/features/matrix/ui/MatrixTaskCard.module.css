@@ -4,29 +4,28 @@
   justify-content: space-between;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-3);
-  background-color: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   touch-action: none;
   user-select: none;
-  /* Animations restricted strictly to transform and opacity */
-  transition:
-    transform var(--duration-fast) var(--easing-standard),
-    opacity var(--duration-fast) var(--easing-standard),
-    border-color var(--duration-fast) var(--easing-standard);
+  transition: all var(--duration-fast) var(--easing-standard);
+  position: relative;
 }
 
 .card:hover {
   border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .cardDragging {
-  opacity: 0.35;
+  opacity: 0.25;
 }
 
 .cardDone {
-  opacity: 0.6;
+  opacity: 0.55;
   background-color: var(--color-bg-secondary);
 }
 
@@ -44,9 +43,14 @@
   justify-content: center;
   color: var(--color-text-muted);
   cursor: grab;
-  padding: 2px;
+  padding: 3px;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.dragHandle:hover {
+  color: var(--color-text-primary);
 }
 
 .dragHandle:focus-visible {
@@ -62,7 +66,8 @@
 }
 
 .title {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
   line-height: var(--line-height-normal);
   word-break: break-word;
@@ -77,28 +82,15 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--font-size-xs);
+  font-size: 11px;
   color: var(--color-text-muted);
-  margin-top: 1px;
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  flex-shrink: 0;
+.deleteBtn {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--easing-standard);
 }
 
-/* Floating overlay style */
-.overlay {
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-border-focus);
-  cursor: grabbing;
-  transform: scale(1.03);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card {
-    transition: none;
-  }
+.card:hover .deleteBtn {
+  opacity: 1;
 }

@@ -4,22 +4,23 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  background-color: var(--color-bg-elevated);
+  background: var(--color-bg-elevated);
   border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  transition:
-    background-color var(--duration-fast) var(--easing-standard),
-    border-color var(--duration-fast) var(--easing-standard),
-    opacity var(--duration-fast) var(--easing-standard);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-fast) var(--easing-standard);
+  position: relative;
 }
 
 .item:hover {
   border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .itemDone {
-  opacity: 0.65;
-  background-color: var(--color-bg-secondary);
+  opacity: 0.6;
+  background: var(--color-bg-secondary);
 }
 
 .leftSection {
@@ -33,7 +34,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 3px;
   flex: 1;
   min-width: 0;
 }
@@ -61,12 +62,13 @@
 .inlineEditInput {
   width: 100%;
   font-size: var(--font-size-sm);
-  padding: var(--space-1) var(--space-2);
+  padding: 6px var(--space-3);
   border: 1px solid var(--color-border-focus);
   border-radius: var(--radius-sm);
   background-color: var(--color-bg-elevated);
   color: var(--color-text-primary);
   outline: none;
+  font-family: inherit;
 }
 
 .metaRow {
@@ -80,12 +82,13 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 1px var(--space-2);
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
   font-weight: var(--font-weight-semibold);
-  border: 1px solid;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
 }
 
 .badgeDO {
@@ -114,17 +117,31 @@
 
 .dueDate {
   color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dueDateOverdue {
+  color: var(--color-error);
+  font-weight: var(--font-weight-semibold);
 }
 
 .notes {
-  color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
-  margin-top: 2px;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  word-break: break-word;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-  flex-shrink: 0;
+  gap: 4px;
+  opacity: 0.8;
+  transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+.item:hover .actions {
+  opacity: 1;
 }
