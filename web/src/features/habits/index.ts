@@ -22,7 +22,10 @@ export {
   createHabitEntity,
 } from './models';
 
-export { HabitRepository, HabitLogRepository } from './data';
+export {
+  HabitRepository,
+  HabitLogRepository,
+} from './data';
 
 export {
   useHabits,
@@ -38,6 +41,15 @@ export {
   daysBetween,
 } from './logic';
 
-export type { WeekStripDay, StreakResult, HabitFilter } from './logic';
+export type {
+  WeekStripDay,
+  StreakResult,
+  HabitFilter,
+} from './logic';
 
-export { HabitsPage, HabitItem, HabitForm, WeekStrip } from './ui';
+export {
+  HabitsPage,
+  HabitItem,
+  HabitForm,
+  WeekStrip,
+} from './ui';
