@@ -6,3 +6,4 @@ export * from './adapters/localStorageAdapter';
 export * from './adapters/indexedDbAdapter';
 export * from './migrations';
 export * from './factory';
+

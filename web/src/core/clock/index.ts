@@ -38,3 +38,4 @@ export function getTodayDateString(clock: Clock = systemClock): string {
 export function getNowISOString(clock: Clock = systemClock): string {
   return toISOStringUTC(clock());
 }
+

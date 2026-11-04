@@ -67,3 +67,4 @@ describe('core/storage/factory', () => {
     expect(settings).not.toBeNull();
   });
 });
+

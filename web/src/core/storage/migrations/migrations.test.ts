@@ -141,3 +141,4 @@ describe('core/storage/migrations', () => {
     expect(await manager.getSchemaVersion()).toBe(1);
   });
 });
+

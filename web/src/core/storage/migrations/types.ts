@@ -12,3 +12,4 @@ export interface Migration {
   description?: string;
   up: (context: MigrationContext) => Promise<void>;
 }
+

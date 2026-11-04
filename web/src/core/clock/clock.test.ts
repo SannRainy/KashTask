@@ -35,3 +35,4 @@ describe('core/clock', () => {
     expect(getTodayDateString(mockClock)).toBe('2027-01-01');
   });
 });
+
