@@ -21,7 +21,7 @@ export type ToastVariant = 'info' | 'success' | 'error' | 'warning';
 
 export interface ToastItem {
   id: string;
-  message: string;
+  message: React.ReactNode;
   variant: ToastVariant;
   /** Auto-dismiss delay in ms. 0 = no auto-dismiss. Default: 4000. */
   duration?: number;
@@ -137,7 +137,7 @@ export function Toast({ item, onDismiss }: ToastProps) {
 
 interface ToastContextValue {
   addToast: (
-    message: string,
+    message: React.ReactNode,
     variant?: ToastVariant,
     duration?: number
   ) => void;
@@ -151,7 +151,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const counterRef = useRef(0);
 
   const addToast = useCallback(
-    (message: string, variant: ToastVariant = 'info', duration = 4000) => {
+    (
+      message: React.ReactNode,
+      variant: ToastVariant = 'info',
+      duration = 4000
+    ) => {
       const id = `toast-${++counterRef.current}`;
       setToasts((prev) => [...prev, { id, message, variant, duration }]);
     },

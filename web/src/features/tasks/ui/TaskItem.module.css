@@ -1,0 +1,130 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    opacity var(--duration-fast) var(--easing-standard);
+}
+
+.item:hover {
+  border-color: var(--color-border-strong);
+}
+
+.itemDone {
+  opacity: 0.65;
+  background-color: var(--color-bg-secondary);
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+  word-break: break-word;
+  cursor: pointer;
+}
+
+.titleDone {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+.inlineEditInput {
+  width: 100%;
+  font-size: var(--font-size-sm);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border-focus);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid;
+  letter-spacing: 0.04em;
+}
+
+.badgeDO {
+  background-color: var(--color-quadrant-do-bg);
+  border-color: var(--color-quadrant-do-border);
+  color: var(--color-quadrant-do-text);
+}
+
+.badgeSCHEDULE {
+  background-color: var(--color-quadrant-schedule-bg);
+  border-color: var(--color-quadrant-schedule-border);
+  color: var(--color-quadrant-schedule-text);
+}
+
+.badgeDELEGATE {
+  background-color: var(--color-quadrant-delegate-bg);
+  border-color: var(--color-quadrant-delegate-border);
+  color: var(--color-quadrant-delegate-text);
+}
+
+.badgeELIMINATE {
+  background-color: var(--color-quadrant-eliminate-bg);
+  border-color: var(--color-quadrant-eliminate-border);
+  color: var(--color-quadrant-eliminate-text);
+}
+
+.dueDate {
+  color: var(--color-text-muted);
+}
+
+.notes {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}

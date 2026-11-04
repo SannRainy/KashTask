@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider, useTheme } from './providers/ThemeProvider';
 import { ThemeToggle } from '@shared/ui/ThemeToggle';
+import { ToastProvider } from '@shared/ui/Toast';
+import { createStorageManager } from '@core/storage';
+import { TaskRepository, initTaskStore, TasksPage } from '@features/tasks';
 import './reset.css';
 import '../core/theme/tokens.css';
 
@@ -15,138 +18,262 @@ const DevComponentsPage = import.meta.env.DEV
 
 function AppContent() {
   const { mode, resolvedTheme, setMode } = useTheme();
-  const isDevRoute =
-    import.meta.env.DEV && window.location.pathname === '/dev/components';
+  const [currentPath, setCurrentPath] = useState(() =>
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
 
-  if (isDevRoute && DevComponentsPage) {
-    return (
-      <React.Suspense fallback={<div>Loading…</div>}>
-        <DevComponentsPage />
-      </React.Suspense>
-    );
-  }
+  useEffect(() => {
+    // Bootstrap offline storage and hydrate task store
+    createStorageManager()
+      .then(({ manager }) => {
+        const repo = new TaskRepository(manager);
+        return initTaskStore(repo);
+      })
+      .catch((err) => {
+        console.error('Failed to initialize storage:', err);
+      });
+
+    // Listen to browser popstate for back/forward navigation
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path: string, e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+  };
+
+  const isDevRoute = import.meta.env.DEV && currentPath === '/dev/components';
+  const isTasksRoute = currentPath === '/tasks';
 
   return (
-    <main
-      style={{
-        display: 'flex',
-        minHeight: '100vh',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 'var(--space-8)',
-        textAlign: 'center',
-        gap: 'var(--space-6)',
-      }}
+    <div
+      style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
     >
-      {/* Theme toggle in top-right corner */}
-      <div
+      {/* Top Application Bar */}
+      <nav
         style={{
-          position: 'fixed',
-          top: 'var(--space-4)',
-          right: 'var(--space-4)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: 'var(--space-3) var(--space-6)',
+          borderBottom: '1px solid var(--color-border-subtle)',
+          backgroundColor: 'var(--color-bg-elevated)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 'var(--z-sticky)',
         }}
+        aria-label="Main Navigation"
       >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-6)',
+          }}
+        >
+          <a
+            href="/"
+            onClick={(e) => navigate('/', e)}
+            style={{
+              fontSize: 'var(--font-size-lg)',
+              fontWeight: 'var(--font-weight-bold)',
+              textDecoration: 'none',
+              color: 'var(--color-text-primary)',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            KashTask
+          </a>
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--space-4)',
+            }}
+          >
+            <a
+              href="/"
+              onClick={(e) => navigate('/', e)}
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: currentPath === '/' ? 600 : 400,
+                color:
+                  currentPath === '/'
+                    ? 'var(--color-accent-default)'
+                    : 'var(--color-text-secondary)',
+                textDecoration: 'none',
+              }}
+            >
+              Overview
+            </a>
+
+            <a
+              href="/tasks"
+              onClick={(e) => navigate('/tasks', e)}
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: isTasksRoute ? 600 : 400,
+                color: isTasksRoute
+                  ? 'var(--color-accent-default)'
+                  : 'var(--color-text-secondary)',
+                textDecoration: 'none',
+              }}
+            >
+              Tasks
+            </a>
+
+            {import.meta.env.DEV && (
+              <a
+                href="/dev/components"
+                onClick={(e) => navigate('/dev/components', e)}
+                style={{
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: isDevRoute ? 600 : 400,
+                  color: isDevRoute
+                    ? 'var(--color-accent-default)'
+                    : 'var(--color-text-muted)',
+                  textDecoration: 'none',
+                }}
+              >
+                UI Kit
+              </a>
+            )}
+          </div>
+        </div>
+
         <ThemeToggle
           mode={mode}
           resolvedTheme={resolvedTheme}
           onModeChange={setMode}
           showLabel
         />
-      </div>
+      </nav>
 
-      <header>
-        <h1
-          style={{
-            fontSize: 'var(--font-size-3xl)',
-            fontWeight: 'var(--font-weight-bold)',
-            marginBottom: 'var(--space-3)',
-            letterSpacing: '-0.025em',
-            color: 'var(--color-text-primary)',
-          }}
+      {/* Main Content View */}
+      {isDevRoute && DevComponentsPage ? (
+        <React.Suspense
+          fallback={<div style={{ padding: 'var(--space-8)' }}>Loading…</div>}
         >
-          KashTask
-        </h1>
-        <p
+          <DevComponentsPage />
+        </React.Suspense>
+      ) : isTasksRoute ? (
+        <TasksPage />
+      ) : (
+        <main
           style={{
-            fontSize: 'var(--font-size-lg)',
-            color: 'var(--color-text-secondary)',
-            maxWidth: '36rem',
-            marginBottom: 'var(--space-8)',
-          }}
-        >
-          Offline-first productivity suite integrating To-Do Lists, Eisenhower
-          Matrix, and Habit Tracking.
-        </p>
-      </header>
-
-      <section
-        style={{
-          backgroundColor: 'var(--color-bg-elevated)',
-          borderRadius: 'var(--radius-lg)',
-          padding: 'var(--space-6)',
-          border: '1px solid var(--color-border-default)',
-          boxShadow: 'var(--shadow-md)',
-          maxWidth: '32rem',
-          width: '100%',
-          textAlign: 'left',
-        }}
-      >
-        <h2
-          style={{
-            fontSize: 'var(--font-size-base)',
-            fontWeight: 'var(--font-weight-semibold)',
-            color: 'var(--color-accent-default)',
-            marginBottom: 'var(--space-3)',
-          }}
-        >
-          System Architecture Status
-        </h2>
-        <ul
-          style={{
-            listStylePosition: 'inside',
-            color: 'var(--color-text-secondary)',
-            fontSize: 'var(--font-size-sm)',
+            flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            gap: 'var(--space-2)',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 'var(--space-8)',
+            textAlign: 'center',
+            gap: 'var(--space-6)',
           }}
         >
-          <li>
-            4 Architectural Zones configured (App, Features, Shared, Core)
-          </li>
-          <li>Feature modules isolated with Public API barrels</li>
-          <li>Strict architectural boundaries enforced via ESLint</li>
-          <li>Design tokens + dark/light theme active</li>
-          <li>Vite + React 18 + TypeScript strict active</li>
-        </ul>
-        {import.meta.env.DEV && (
-          <p
+          <header>
+            <h1
+              style={{
+                fontSize: 'var(--font-size-3xl)',
+                fontWeight: 'var(--font-weight-bold)',
+                marginBottom: 'var(--space-3)',
+                letterSpacing: '-0.025em',
+                color: 'var(--color-text-primary)',
+              }}
+            >
+              KashTask
+            </h1>
+            <p
+              style={{
+                fontSize: 'var(--font-size-lg)',
+                color: 'var(--color-text-secondary)',
+                maxWidth: '36rem',
+                marginBottom: 'var(--space-6)',
+              }}
+            >
+              Offline-first productivity suite integrating To-Do Lists,
+              Eisenhower Matrix, and Habit Tracking.
+            </p>
+            <div>
+              <button
+                type="button"
+                onClick={(e) => navigate('/tasks', e)}
+                style={{
+                  backgroundColor: 'var(--color-accent-default)',
+                  color: 'var(--color-text-on-accent)',
+                  border: 'none',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-2) var(--space-5)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 'var(--font-weight-semibold)',
+                  cursor: 'pointer',
+                }}
+              >
+                Go to Tasks →
+              </button>
+            </div>
+          </header>
+
+          <section
             style={{
-              marginTop: 'var(--space-4)',
-              fontSize: 'var(--font-size-xs)',
-              color: 'var(--color-text-muted)',
+              backgroundColor: 'var(--color-bg-elevated)',
+              borderRadius: 'var(--radius-lg)',
+              padding: 'var(--space-6)',
+              border: '1px solid var(--color-border-default)',
+              boxShadow: 'var(--shadow-md)',
+              maxWidth: '32rem',
+              width: '100%',
+              textAlign: 'left',
             }}
           >
-            Dev: visit{' '}
-            <a
-              href="/dev/components"
-              style={{ color: 'var(--color-accent-default)' }}
+            <h2
+              style={{
+                fontSize: 'var(--font-size-base)',
+                fontWeight: 'var(--font-weight-semibold)',
+                color: 'var(--color-accent-default)',
+                marginBottom: 'var(--space-3)',
+              }}
             >
-              /dev/components
-            </a>{' '}
-            for the component catalogue.
-          </p>
-        )}
-      </section>
-    </main>
+              System Architecture Status
+            </h2>
+            <ul
+              style={{
+                listStylePosition: 'inside',
+                color: 'var(--color-text-secondary)',
+                fontSize: 'var(--font-size-sm)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-2)',
+              }}
+            >
+              <li>
+                4 Architectural Zones configured (App, Features, Shared, Core)
+              </li>
+              <li>Feature modules isolated with Public API barrels</li>
+              <li>Strict architectural boundaries enforced via ESLint</li>
+              <li>Design tokens + dark/light theme active</li>
+              <li>Feature Tasks with 4 layers and local persistence ready</li>
+              <li>Vite + React 18 + TypeScript strict active</li>
+            </ul>
+          </section>
+        </main>
+      )}
+    </div>
   );
 }
 
 export function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </ThemeProvider>
   );
 }
