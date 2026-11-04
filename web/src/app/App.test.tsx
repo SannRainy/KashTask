@@ -25,4 +25,3 @@ describe('App Component', () => {
     ).toBeInTheDocument();
   });
 });
-
