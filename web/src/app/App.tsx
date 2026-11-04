@@ -11,6 +11,7 @@ import {
   initHabitStore,
   HabitsPage,
 } from '@features/habits';
+import { StatsPage } from '@features/stats';
 import './reset.css';
 import '../core/theme/tokens.css';
 
@@ -64,6 +65,7 @@ function AppContent() {
   const isTasksRoute = currentPath === '/tasks';
   const isMatrixRoute = currentPath === '/matrix';
   const isHabitsRoute = currentPath === '/habits';
+  const isStatsRoute = currentPath === '/stats';
 
   return (
     <div
@@ -173,6 +175,21 @@ function AppContent() {
               Habits
             </a>
 
+            <a
+              href="/stats"
+              onClick={(e) => navigate('/stats', e)}
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: isStatsRoute ? 600 : 400,
+                color: isStatsRoute
+                  ? 'var(--color-accent-default)'
+                  : 'var(--color-text-secondary)',
+                textDecoration: 'none',
+              }}
+            >
+              Stats
+            </a>
+
             {import.meta.env.DEV && (
               <a
                 href="/dev/components"
@@ -213,6 +230,8 @@ function AppContent() {
         <MatrixPage />
       ) : isHabitsRoute ? (
         <HabitsPage />
+      ) : isStatsRoute ? (
+        <StatsPage />
       ) : (
         <main
           style={{
@@ -247,7 +266,7 @@ function AppContent() {
               }}
             >
               Offline-first productivity suite integrating To-Do Lists,
-              Eisenhower Matrix, and Habit Tracking.
+              Eisenhower Matrix, Habit Tracking, and Weekly/Monthly Analytics.
             </p>
             <div
               style={{
@@ -307,6 +326,23 @@ function AppContent() {
               >
                 Open Habits →
               </button>
+
+              <button
+                type="button"
+                onClick={(e) => navigate('/stats', e)}
+                style={{
+                  backgroundColor: 'var(--color-bg-secondary)',
+                  color: 'var(--color-text-primary)',
+                  border: '1px solid var(--color-border-default)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-2) var(--space-5)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 'var(--font-weight-semibold)',
+                  cursor: 'pointer',
+                }}
+              >
+                Open Stats →
+              </button>
             </div>
           </header>
 
@@ -351,6 +387,7 @@ function AppContent() {
               <li>Feature Tasks with 4 layers and local persistence ready</li>
               <li>Feature Matrix with 2x2 board and drag-and-drop ready</li>
               <li>Feature Habits with streak tracking and 7-day strip ready</li>
+              <li>Feature Stats with custom SVG charts and heatmaps ready</li>
               <li>Vite + React 18 + TypeScript strict active</li>
             </ul>
           </section>
