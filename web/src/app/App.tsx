@@ -4,6 +4,7 @@ import { ThemeToggle } from '@shared/ui/ThemeToggle';
 import { ToastProvider } from '@shared/ui/Toast';
 import { createStorageManager } from '@core/storage';
 import { TaskRepository, initTaskStore, TasksPage } from '@features/tasks';
+import { MatrixPage } from '@features/matrix';
 import './reset.css';
 import '../core/theme/tokens.css';
 
@@ -49,6 +50,7 @@ function AppContent() {
 
   const isDevRoute = import.meta.env.DEV && currentPath === '/dev/components';
   const isTasksRoute = currentPath === '/tasks';
+  const isMatrixRoute = currentPath === '/matrix';
 
   return (
     <div
@@ -128,6 +130,21 @@ function AppContent() {
               Tasks
             </a>
 
+            <a
+              href="/matrix"
+              onClick={(e) => navigate('/matrix', e)}
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: isMatrixRoute ? 600 : 400,
+                color: isMatrixRoute
+                  ? 'var(--color-accent-default)'
+                  : 'var(--color-text-secondary)',
+                textDecoration: 'none',
+              }}
+            >
+              Matrix
+            </a>
+
             {import.meta.env.DEV && (
               <a
                 href="/dev/components"
@@ -164,6 +181,8 @@ function AppContent() {
         </React.Suspense>
       ) : isTasksRoute ? (
         <TasksPage />
+      ) : isMatrixRoute ? (
+        <MatrixPage />
       ) : (
         <main
           style={{
@@ -200,10 +219,33 @@ function AppContent() {
               Offline-first productivity suite integrating To-Do Lists,
               Eisenhower Matrix, and Habit Tracking.
             </p>
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                gap: 'var(--space-3)',
+                justifyContent: 'center',
+              }}
+            >
               <button
                 type="button"
                 onClick={(e) => navigate('/tasks', e)}
+                style={{
+                  backgroundColor: 'var(--color-bg-secondary)',
+                  color: 'var(--color-text-primary)',
+                  border: '1px solid var(--color-border-default)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-2) var(--space-5)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 'var(--font-weight-semibold)',
+                  cursor: 'pointer',
+                }}
+              >
+                Open Tasks →
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => navigate('/matrix', e)}
                 style={{
                   backgroundColor: 'var(--color-accent-default)',
                   color: 'var(--color-text-on-accent)',
@@ -215,7 +257,7 @@ function AppContent() {
                   cursor: 'pointer',
                 }}
               >
-                Go to Tasks →
+                Open Matrix Board →
               </button>
             </div>
           </header>
@@ -259,6 +301,7 @@ function AppContent() {
               <li>Strict architectural boundaries enforced via ESLint</li>
               <li>Design tokens + dark/light theme active</li>
               <li>Feature Tasks with 4 layers and local persistence ready</li>
+              <li>Feature Matrix with 2x2 board and drag-and-drop ready</li>
               <li>Vite + React 18 + TypeScript strict active</li>
             </ul>
           </section>

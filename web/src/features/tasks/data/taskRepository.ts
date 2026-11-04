@@ -36,4 +36,3 @@ export class TaskRepository implements ITaskRepository {
     return this.collection.clear();
   }
 }
-
