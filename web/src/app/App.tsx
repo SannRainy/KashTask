@@ -5,6 +5,12 @@ import { ToastProvider } from '@shared/ui/Toast';
 import { createStorageManager } from '@core/storage';
 import { TaskRepository, initTaskStore, TasksPage } from '@features/tasks';
 import { MatrixPage } from '@features/matrix';
+import {
+  HabitRepository,
+  HabitLogRepository,
+  initHabitStore,
+  HabitsPage,
+} from '@features/habits';
 import './reset.css';
 import '../core/theme/tokens.css';
 
@@ -24,11 +30,17 @@ function AppContent() {
   );
 
   useEffect(() => {
-    // Bootstrap offline storage and hydrate task store
+    // Bootstrap offline storage and hydrate task and habit stores
     createStorageManager()
       .then(({ manager }) => {
-        const repo = new TaskRepository(manager);
-        return initTaskStore(repo);
+        const taskRepo = new TaskRepository(manager);
+        const habitRepo = new HabitRepository(manager);
+        const logRepo = new HabitLogRepository(manager);
+
+        return Promise.all([
+          initTaskStore(taskRepo),
+          initHabitStore(habitRepo, logRepo),
+        ]);
       })
       .catch((err) => {
         console.error('Failed to initialize storage:', err);
@@ -51,6 +63,7 @@ function AppContent() {
   const isDevRoute = import.meta.env.DEV && currentPath === '/dev/components';
   const isTasksRoute = currentPath === '/tasks';
   const isMatrixRoute = currentPath === '/matrix';
+  const isHabitsRoute = currentPath === '/habits';
 
   return (
     <div
@@ -145,6 +158,21 @@ function AppContent() {
               Matrix
             </a>
 
+            <a
+              href="/habits"
+              onClick={(e) => navigate('/habits', e)}
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: isHabitsRoute ? 600 : 400,
+                color: isHabitsRoute
+                  ? 'var(--color-accent-default)'
+                  : 'var(--color-text-secondary)',
+                textDecoration: 'none',
+              }}
+            >
+              Habits
+            </a>
+
             {import.meta.env.DEV && (
               <a
                 href="/dev/components"
@@ -183,6 +211,8 @@ function AppContent() {
         <TasksPage />
       ) : isMatrixRoute ? (
         <MatrixPage />
+      ) : isHabitsRoute ? (
+        <HabitsPage />
       ) : (
         <main
           style={{
@@ -224,6 +254,7 @@ function AppContent() {
                 display: 'flex',
                 gap: 'var(--space-3)',
                 justifyContent: 'center',
+                flexWrap: 'wrap',
               }}
             >
               <button
@@ -258,6 +289,23 @@ function AppContent() {
                 }}
               >
                 Open Matrix Board →
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => navigate('/habits', e)}
+                style={{
+                  backgroundColor: 'var(--color-bg-secondary)',
+                  color: 'var(--color-text-primary)',
+                  border: '1px solid var(--color-border-default)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-2) var(--space-5)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 'var(--font-weight-semibold)',
+                  cursor: 'pointer',
+                }}
+              >
+                Open Habits →
               </button>
             </div>
           </header>
@@ -302,6 +350,7 @@ function AppContent() {
               <li>Design tokens + dark/light theme active</li>
               <li>Feature Tasks with 4 layers and local persistence ready</li>
               <li>Feature Matrix with 2x2 board and drag-and-drop ready</li>
+              <li>Feature Habits with streak tracking and 7-day strip ready</li>
               <li>Vite + React 18 + TypeScript strict active</li>
             </ul>
           </section>
