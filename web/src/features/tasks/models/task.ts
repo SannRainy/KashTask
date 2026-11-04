@@ -163,3 +163,4 @@ export interface ITaskRepository {
   delete(id: string): Promise<void>;
   clear(): Promise<void>;
 }
+

@@ -47,3 +47,4 @@ describe('TaskRepository (with MemoryAdapter)', () => {
     expect(await repo.getAll()).toHaveLength(0);
   });
 });
+
