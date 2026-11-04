@@ -4,11 +4,55 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8fafc" />
     <title>KashTask - Offline-First Productivity</title>
+    <!--
+      Anti-flash theme script.
+      Runs synchronously before first paint so the correct data-theme attribute
+      is set on <html> before any CSS is applied, preventing a flash of the
+      wrong colour scheme on page load.
+    -->
+    <script>
+      (function () {
+        var STORAGE_KEY = 'kashtask:theme';
+        var ATTR = 'data-theme';
+        var META_SELECTOR = 'meta[name="theme-color"]';
+
+        var saved = null;
+        try {
+          saved = localStorage.getItem(STORAGE_KEY);
+        } catch (_) {
+          /* private mode / storage unavailable */
+        }
+
+        var mode = saved || 'system';
+        var resolved = mode;
+
+        if (mode === 'system') {
+          try {
+            resolved = window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+          } catch (_) {
+            resolved = 'light';
+          }
+        }
+
+        document.documentElement.setAttribute(ATTR, resolved);
+
+        // Update meta theme-color immediately
+        var metaEl = document.querySelector(META_SELECTOR);
+        if (metaEl) {
+          metaEl.setAttribute(
+            'content',
+            resolved === 'dark' ? '#0f172a' : '#f8fafc'
+          );
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

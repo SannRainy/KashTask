@@ -1,7 +1,31 @@
 import React from 'react';
+import { ThemeProvider, useTheme } from './providers/ThemeProvider';
+import { ThemeToggle } from '@shared/ui/ThemeToggle';
 import './reset.css';
+import '../core/theme/tokens.css';
 
-export const App: React.FC = () => {
+// Lazy-load dev components page (only bundled in dev mode)
+const DevComponentsPage = import.meta.env.DEV
+  ? React.lazy(() =>
+      import('./dev/ComponentsPage').then((m) => ({
+        default: m.ComponentsPage,
+      }))
+    )
+  : null;
+
+function AppContent() {
+  const { mode, resolvedTheme, setMode } = useTheme();
+  const isDevRoute =
+    import.meta.env.DEV && window.location.pathname === '/dev/components';
+
+  if (isDevRoute && DevComponentsPage) {
+    return (
+      <React.Suspense fallback={<div>Loading…</div>}>
+        <DevComponentsPage />
+      </React.Suspense>
+    );
+  }
+
   return (
     <main
       style={{
@@ -10,27 +34,45 @@ export const App: React.FC = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem',
+        padding: 'var(--space-8)',
         textAlign: 'center',
+        gap: 'var(--space-6)',
       }}
     >
+      {/* Theme toggle in top-right corner */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 'var(--space-4)',
+          right: 'var(--space-4)',
+        }}
+      >
+        <ThemeToggle
+          mode={mode}
+          resolvedTheme={resolvedTheme}
+          onModeChange={setMode}
+          showLabel
+        />
+      </div>
+
       <header>
         <h1
           style={{
-            fontSize: '2.5rem',
-            fontWeight: 700,
-            marginBottom: '0.75rem',
+            fontSize: 'var(--font-size-3xl)',
+            fontWeight: 'var(--font-weight-bold)',
+            marginBottom: 'var(--space-3)',
             letterSpacing: '-0.025em',
+            color: 'var(--color-text-primary)',
           }}
         >
           KashTask
         </h1>
         <p
           style={{
-            fontSize: '1.125rem',
-            color: '#94a3b8',
+            fontSize: 'var(--font-size-lg)',
+            color: 'var(--color-text-secondary)',
             maxWidth: '36rem',
-            marginBottom: '2rem',
+            marginBottom: 'var(--space-8)',
           }}
         >
           Offline-first productivity suite integrating To-Do Lists, Eisenhower
@@ -40,10 +82,11 @@ export const App: React.FC = () => {
 
       <section
         style={{
-          backgroundColor: '#1e293b',
-          borderRadius: '0.75rem',
-          padding: '1.5rem',
-          border: '1px solid #334155',
+          backgroundColor: 'var(--color-bg-elevated)',
+          borderRadius: 'var(--radius-lg)',
+          padding: 'var(--space-6)',
+          border: '1px solid var(--color-border-default)',
+          boxShadow: 'var(--shadow-md)',
           maxWidth: '32rem',
           width: '100%',
           textAlign: 'left',
@@ -51,10 +94,10 @@ export const App: React.FC = () => {
       >
         <h2
           style={{
-            fontSize: '1rem',
-            fontWeight: 600,
-            color: '#38bdf8',
-            marginBottom: '0.5rem',
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            color: 'var(--color-accent-default)',
+            marginBottom: 'var(--space-3)',
           }}
         >
           System Architecture Status
@@ -62,11 +105,11 @@ export const App: React.FC = () => {
         <ul
           style={{
             listStylePosition: 'inside',
-            color: '#cbd5e1',
-            fontSize: '0.875rem',
+            color: 'var(--color-text-secondary)',
+            fontSize: 'var(--font-size-sm)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.375rem',
+            gap: 'var(--space-2)',
           }}
         >
           <li>
@@ -74,11 +117,38 @@ export const App: React.FC = () => {
           </li>
           <li>Feature modules isolated with Public API barrels</li>
           <li>Strict architectural boundaries enforced via ESLint</li>
+          <li>Design tokens + dark/light theme active</li>
           <li>Vite + React 18 + TypeScript strict active</li>
         </ul>
+        {import.meta.env.DEV && (
+          <p
+            style={{
+              marginTop: 'var(--space-4)',
+              fontSize: 'var(--font-size-xs)',
+              color: 'var(--color-text-muted)',
+            }}
+          >
+            Dev: visit{' '}
+            <a
+              href="/dev/components"
+              style={{ color: 'var(--color-accent-default)' }}
+            >
+              /dev/components
+            </a>{' '}
+            for the component catalogue.
+          </p>
+        )}
       </section>
     </main>
   );
-};
+}
+
+export function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
 
 export default App;

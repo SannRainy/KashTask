@@ -1,0 +1,123 @@
+/* Toast container (positioned by ToastProvider) */
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  min-width: 280px;
+  max-width: 400px;
+  position: relative;
+  animation: toastIn var(--duration-normal) var(--easing-decelerate);
+  border: 1px solid;
+}
+
+/* Variants */
+.info {
+  background-color: var(--color-info-bg);
+  border-color: var(--color-info-border);
+  color: var(--color-text-primary);
+}
+
+.success {
+  background-color: var(--color-success-bg);
+  border-color: var(--color-success-border);
+  color: var(--color-text-primary);
+}
+
+.error {
+  background-color: var(--color-error-bg);
+  border-color: var(--color-error-border);
+  color: var(--color-text-primary);
+}
+
+.warning {
+  background-color: var(--color-warning-bg);
+  border-color: var(--color-warning-border);
+  color: var(--color-text-primary);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.info .icon {
+  color: var(--color-info);
+}
+.success .icon {
+  color: var(--color-success);
+}
+.error .icon {
+  color: var(--color-error);
+}
+.warning .icon {
+  color: var(--color-warning);
+}
+
+.message {
+  flex: 1;
+  font-weight: var(--font-weight-normal);
+}
+
+.dismissButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.dismissButton:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.dismissButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ToastContainer — fixed viewport position */
+.container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.container > * {
+  pointer-events: auto;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

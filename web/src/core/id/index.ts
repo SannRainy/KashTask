@@ -25,4 +25,3 @@ export function isValidId(id: string): boolean {
 export function createMonotonicIdGenerator(): () => string {
   return monotonicFactory();
 }
-
