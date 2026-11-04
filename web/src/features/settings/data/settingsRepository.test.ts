@@ -31,3 +31,4 @@ describe('SettingsRepository', () => {
     expect(reloaded).toEqual(updated);
   });
 });
+
