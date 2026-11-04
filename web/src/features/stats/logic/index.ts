@@ -16,4 +16,3 @@ export {
 } from './statsSelectors';
 
 export type { SelectPeriodStatsOptions } from './statsSelectors';
-

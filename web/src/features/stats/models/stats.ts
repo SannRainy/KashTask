@@ -67,4 +67,3 @@ export interface PeriodStats {
   bestStreak: BestStreakStat | null;
   quadrantDistribution: QuadrantDistribution;
 }
-
