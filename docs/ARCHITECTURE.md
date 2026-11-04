@@ -78,12 +78,12 @@ $$\mathbf{app} \longrightarrow \mathbf{features} \longrightarrow \mathbf{shared}
 - **Deep import dilarang keras**.
   - Contoh benar:
     ```typescript
-    import { Task, useTaskStore } from '@/features/tasks';
+    import { Task, useTaskStore } from '@features/tasks';
     ```
   - Contoh dilarang:
     ```typescript
-    import { taskRepository } from '@/features/tasks/data/taskRepository';
-    import { TaskCard } from '@/features/tasks/ui/TaskCard';
+    import { taskRepository } from '@features/tasks/data/taskRepository';
+    import { TaskCard } from '@features/tasks/ui/TaskCard';
     ```
 
 ---
@@ -134,12 +134,17 @@ KashTask/
 │   ├── DOMAIN.md
 │   └── PRODUCT.md
 ├── web/
-│   ├── .gitkeep
+│   ├── index.html
+│   ├── vite.config.ts
+│   ├── vitest.config.ts
+│   ├── eslint.config.js
+│   ├── tsconfig.json
 │   └── src/
+│       ├── main.tsx
 │       ├── app/
-│       │   ├── router/
-│       │   ├── providers/
-│       │   └── layout/
+│       │   ├── App.tsx
+│       │   ├── App.test.tsx
+│       │   └── reset.css
 │       ├── features/
 │       │   ├── tasks/
 │       │   │   ├── index.ts              # Public API barrel export
@@ -213,21 +218,29 @@ KashTask/
 
 ## 4. Cara Memverifikasi Batasan Arsitektur
 
-Untuk memastikan tidak terjadi pelanggaran arsitektur, verifikasi dijalankan dengan mekanisme berikut:
+Untuk memastikan tidak terjadi pelanggaran arsitektur, verifikasi dijalankan dengan mekanisme otomatis berikut:
 
 ### 1. Verifikasi Web (`web/`)
-- **Lint & Aturan Boundary**:
-  - Konfigurasi ESLint menggunakan `eslint-plugin-import` dengan `no-restricted-paths`:
-    - Memblokir impor dari `core` ke zona mana pun.
-    - Memblokir impor dari `shared` ke `features` atau `app`.
-    - Memblokir impor dari `features` ke `app`.
-    - Memblokir impor lapis `ui` ke lapis `data`.
-    - Memblokir impor lapis `models` ke lapis mana pun dalam fitur.
-    - Memblokir deep import antar-fitur (`features/*/*` dilarang selain via barrel root `features/*`).
-- **Pengecekan Tipe**:
-  - `pnpm --filter web typecheck` (`tsc --noEmit`) dijalankan dengan mode strict.
-- **Unit Test**:
-  - `pnpm --filter web test` (Vitest) menguji fungsi murni dan store logic secara terisolasi.
+Verifikasi batas arsitektural di platform Web ditegakkan secara otomatis melalui **ESLint 9 Flat Config** bersama plugin **`eslint-plugin-boundaries`** dan **`eslint-import-resolver-typescript`**:
+
+1. **Pemetaan Elemen (`boundaries/elements`)**:
+   - Seluruh berkas di `src/` dipetakan ke tipe elemen terisolasi: `app`, `feature-entry`, `feature-ui`, `feature-logic`, `feature-data`, `feature-models`, `shared`, dan `core`.
+   - Modul fitur memanfaatkan penangkap (*capture*) nama fitur (`feature`) agar batas internal masing-masing fitur tetap terisolasi satu sama lain.
+2. **Penegakan Arah Dependensi 4 Zona & 4 Lapis (`boundaries/element-types`)**:
+   - **Zona Core**: Bebas impor keluar (*zero outward dependencies*), dilarang mengimpor `shared`, `features`, maupun `app`.
+   - **Zona Shared**: Hanya diizinkan mengimpor `core` (komponen presentasi murni tanpa logika domain).
+   - **Lapis Models (`feature-models`)**: Berisi interface dan tipe data murni, dilarang mengimpor `ui`, `logic`, atau `data`.
+   - **Lapis Data (`feature-data`)**: Mengimplementasikan kontrak interface dan menyentuh `core/storage`. Dilarang mengimpor `ui` atau `logic`.
+   - **Lapis Logic (`feature-logic`)**: Menerima kontrak repository melalui injeksi dependensi. Dilarang mengimpor `ui` atau `data` secara langsung.
+   - **Lapis UI (`feature-ui`)**: Hanya boleh mengimpor `logic` dan `models` dari fitur yang sama. **Dilarang keras mengimpor lapis `data`**.
+   - **Zona App (`app`)**: Merakit bootstrap, layout shell, dan routing. Hanya boleh mengimpor `feature-entry` (public API), `shared`, dan `core`.
+3. **Larangan Deep Import Antar-Fitur (`boundaries/entry-point`)**:
+   - Fitur lain dan zona `app` **HANYA** diizinkan mengakses fitur melalui Public API berkas `index.ts` (`feature-entry`).
+   - Impor langsung ke berkas internal fitur lain (misal: `@features/tasks/data/...` atau `@features/tasks/ui/...`) akan memicu kegagalan lint seketika (*exit code 1*).
+4. **Pengecekan Tipe Statis & Build**:
+   - `pnpm typecheck` (`tsc --noEmit` dengan strict mode) memastikan seluruh definisi antarmuka dan path alias valid.
+   - `pnpm test` (Vitest + jsdom + React Testing Library) memastikan unit test berjalan lancar.
+   - `pnpm build` memastikan kompilasi bundle Vite produksi berhasil tanpa galat.
 
 ### 2. Verifikasi Mobile (`mobile/`)
 - **Analisis Statis Dart**:
