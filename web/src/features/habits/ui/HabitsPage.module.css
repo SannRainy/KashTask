@@ -1,9 +1,8 @@
 .page {
   flex: 1;
-  max-width: 900px;
   width: 100%;
-  margin: 0 auto;
-  padding: var(--space-8) var(--space-4);
+  box-sizing: border-box;
+  padding: 32px 48px;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -15,20 +14,22 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-extrabold);
+  font-size: 28px;
+  font-weight: 800;
   color: var(--color-text-primary);
   margin: 0;
   letter-spacing: -0.03em;
 }
 
 .subtitle {
-  font-size: var(--font-size-sm);
+  font-size: 14px;
   color: var(--color-text-secondary);
-  margin-top: var(--space-1);
+  margin-top: 4px;
 }
 
 .controlsRow {
@@ -53,9 +54,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 6px 14px;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--color-text-secondary);
   border: none;
   background: transparent;
@@ -71,20 +72,19 @@
 .tabBtnActive {
   background-color: var(--color-bg-elevated);
   color: var(--color-accent-default);
-  font-weight: var(--font-weight-semibold);
   box-shadow: var(--shadow-sm);
 }
 
 .countBadge {
   font-size: 11px;
-  padding: 1px 6px;
+  padding: 1px 7px;
   border-radius: var(--radius-full);
-  background-color: var(--color-neutral-200);
+  background-color: var(--color-neutral-300);
   color: var(--color-neutral-700);
 }
 
 :root[data-theme='dark'] .countBadge {
-  background-color: var(--color-neutral-300);
+  background-color: var(--color-neutral-400);
   color: var(--color-neutral-800);
 }
 
@@ -108,4 +108,14 @@
   text-decoration: underline;
   margin-left: var(--space-2);
   padding: 0;
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 20px 16px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
 }

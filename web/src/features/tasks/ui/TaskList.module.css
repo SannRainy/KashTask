@@ -10,8 +10,8 @@
   align-items: center;
   gap: var(--space-2);
   background: var(--color-bg-elevated);
-  padding: 6px 8px;
-  border-radius: var(--radius-xl);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border-default);
   box-shadow: var(--shadow-sm);
   transition: all var(--duration-fast) var(--easing-standard);
@@ -19,13 +19,13 @@
 
 .quickAddRow:focus-within {
   border-color: var(--color-accent-default);
-  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+  box-shadow: 0 0 0 2px var(--color-accent-subtle);
 }
 
 .quickAddInput {
   flex: 1;
-  height: 44px;
-  padding: 0 var(--space-3);
+  height: 40px;
+  padding: 0 var(--space-2);
   font-size: var(--font-size-sm);
   background: transparent;
   border: none;
@@ -44,25 +44,25 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  padding: var(--space-2) 0;
+  padding: var(--space-1) 0;
 }
 
 .statusTabs {
   display: flex;
   align-items: center;
   gap: 2px;
-  background: var(--color-bg-surface);
+  background: var(--color-bg-secondary);
   padding: 3px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border-subtle);
 }
 
 .tab {
   border: none;
   background: transparent;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -74,8 +74,8 @@
 }
 
 .tabActive {
-  background: var(--color-bg-elevated);
-  color: var(--color-accent-default);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
   font-weight: var(--font-weight-semibold);
   box-shadow: var(--shadow-sm);
 }
@@ -90,9 +90,9 @@
 .chip {
   border: 1px solid var(--color-border-subtle);
   background: var(--color-bg-elevated);
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -112,9 +112,9 @@
 }
 
 .sortSelect {
-  height: 36px;
+  height: 34px;
   padding: 0 var(--space-3);
-  font-size: var(--font-size-xs);
+  font-size: 12px;
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-md);

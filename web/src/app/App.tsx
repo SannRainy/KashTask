@@ -10,6 +10,7 @@ import {
 } from '@features/habits';
 import { SettingsRepository, initSettings } from '@features/settings';
 import { AppShell } from './AppShell';
+import shellStyles from './AppShell.module.css';
 import { ErrorBoundary } from './ErrorBoundary';
 import { NotFoundPage } from './NotFoundPage';
 import { KeyboardHelpDialog } from './KeyboardHelpDialog';
@@ -48,8 +49,6 @@ const DevComponentsPage = import.meta.env.DEV
     )
   : null;
 
-// ── Lazy fallback ────────────────────────────────────────────────────────────
-
 function PageFallback() {
   return (
     <div
@@ -67,9 +66,9 @@ function PageFallback() {
     >
       <div
         style={{
-          width: 36,
-          height: 36,
-          border: '3px solid var(--color-border-default)',
+          width: 32,
+          height: 32,
+          border: '2px solid var(--color-border-default)',
           borderTopColor: 'var(--color-accent-default)',
           borderRadius: 'var(--radius-full)',
           animation: 'spin 0.7s linear infinite',
@@ -81,7 +80,7 @@ function PageFallback() {
   );
 }
 
-// ── Overview / Hero Dashboard (Modern Minimalist Editorial Style) ───────────
+// ── Overview / Hero Dashboard (Bespoke Warm Sand #C8B48A / Cream #F5F0E6) ──
 
 function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
   const modules = [
@@ -90,28 +89,57 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
       label: 'Tasks',
       desc: 'Rapid capture, status tracking, inline notes, and due dates with zero latency.',
       path: '/tasks',
+      tag: 'ACTIVE',
       accent: 'var(--color-accent-default)',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      ),
     },
     {
       title: 'Eisenhower Matrix',
       label: 'Matrix',
-      desc: '2×2 strategic prioritization board with fluid gesture & keyboard drag & drop.',
+      desc: '2x2 strategic prioritization board with fluid gesture & keyboard drag & drop.',
       path: '/matrix',
-      accent: 'var(--color-quadrant-delegate)',
+      tag: 'STRATEGIC',
+      accent: '#38bdf8',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <rect x="3" y="3" width="7" height="7" rx="2" />
+          <rect x="14" y="3" width="7" height="7" rx="2" />
+          <rect x="3" y="14" width="7" height="7" rx="2" />
+          <rect x="14" y="14" width="7" height="7" rx="2" />
+        </svg>
+      ),
     },
     {
       title: 'Habit Consistency',
       label: 'Habits',
       desc: 'Daily & weekday streak tracker with interactive weekly timeline strips.',
       path: '/habits',
-      accent: 'var(--color-success)',
+      tag: 'STREAKS',
+      accent: '#10b981',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      ),
     },
     {
       title: 'Metrics & Telemetry',
       label: 'Stats',
       desc: 'Weekly & monthly vector visualizers, quadrant distribution, and heatmap.',
       path: '/stats',
-      accent: 'var(--color-quadrant-schedule)',
+      tag: 'ANALYTICS',
+      accent: '#eab308',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <rect x="4" y="10" width="3.5" height="10" rx="1.5" />
+          <rect x="10.25" y="4" width="3.5" height="16" rx="1.5" />
+          <rect x="16.5" y="8" width="3.5" height="12" rx="1.5" />
+        </svg>
+      ),
     },
   ];
 
@@ -121,109 +149,95 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        padding:
-          'clamp(var(--space-8), 4vw, var(--space-12)) clamp(var(--space-5), 5vw, var(--space-16))',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        padding: '24px 48px 48px',
         width: '100%',
-        gap: 'var(--space-10)',
+        boxSizing: 'border-box',
+        gap: '32px',
       }}
     >
-      {/* Editorial Hero Header */}
-      <section
+      {/* Top Banner Row */}
+      <div
         style={{
           display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--space-4)',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '20px',
         }}
       >
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 'var(--space-2)',
-            padding: '4px 12px',
-            borderRadius: 'var(--radius-full)',
-            background: 'var(--color-accent-subtle)',
-            color: 'var(--color-accent-default)',
-            border: '1px solid var(--color-accent-subtle-hover)',
-            width: 'fit-content',
-            fontSize: 'var(--font-size-xs)',
-            fontWeight: 'var(--font-weight-semibold)',
-          }}
-        >
-          <span
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div
             style={{
-              width: 7,
-              height: 7,
-              borderRadius: 'var(--radius-full)',
-              background: 'var(--color-success)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '11px',
+              fontWeight: 700,
+              color: 'var(--color-success)',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
             }}
-          />
-          All systems operational · Local offline core
-        </div>
+          >
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: 'var(--radius-full)',
+                background: 'var(--color-success)',
+                boxShadow: '0 0 8px var(--color-success)',
+              }}
+            />
+            Active · Offline Core
+          </div>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--space-3)',
-          }}
-        >
           <h1
             style={{
-              fontSize:
-                'clamp(var(--font-size-3xl), 5vw, var(--font-size-4xl))',
-              fontWeight: 'var(--font-weight-extrabold)',
+              fontSize: '40px',
+              fontWeight: 800,
               letterSpacing: '-0.04em',
-              lineHeight: '1.1',
               color: 'var(--color-text-primary)',
+              margin: 0,
+              lineHeight: 1.1,
             }}
           >
             KashTask
           </h1>
+
           <p
             style={{
-              fontSize: 'var(--font-size-lg)',
+              fontSize: '14px',
               color: 'var(--color-text-secondary)',
-              maxWidth: '44rem',
-              lineHeight: '1.6',
+              margin: 0,
+              maxWidth: '560px',
+              lineHeight: 1.6,
             }}
           >
-            Offline-first productivity suite integrating To-Do Lists, Eisenhower
-            Matrix, Habit Tracking, and Weekly/Monthly Analytics.
+            Offline-first productivity suite integrating To-Do Lists, Eisenhower Matrix, Habit Tracking, and Weekly/Monthly Analytics.
           </p>
         </div>
 
-        {/* Quick Launch Actions */}
-        <div
-          style={{
-            display: 'flex',
-            gap: 'var(--space-3)',
-            flexWrap: 'wrap',
-            paddingTop: 'var(--space-2)',
-          }}
-        >
+        {/* Action Buttons in Warm Bronze/Sand Accent */}
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
           <button
             type="button"
             onClick={() => onNavigate('/tasks')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 'var(--space-2)',
-              background: 'var(--color-accent-default)',
+              gap: '8px',
+              background: 'linear-gradient(135deg, var(--color-accent-default), #998358)',
               color: 'var(--color-text-on-accent)',
               border: 'none',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 'var(--radius-xl)',
               padding: '12px 24px',
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 'var(--font-weight-semibold)',
+              fontSize: '14px',
+              fontWeight: 700,
               cursor: 'pointer',
-              boxShadow: 'var(--shadow-md)',
-              transition: 'all var(--duration-fast) var(--easing-standard)',
+              boxShadow: '0 4px 18px var(--color-accent-glow)',
+              transition: 'all 0.15s ease',
             }}
           >
-            Open Tasks ↗
+            <span>+</span> Open Tasks →
           </button>
           <button
             type="button"
@@ -231,31 +245,32 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 'var(--space-2)',
-              background: 'var(--color-bg-elevated)',
+              gap: '8px',
+              background: 'var(--color-bg-surface)',
               color: 'var(--color-text-primary)',
               border: '1px solid var(--color-border-default)',
-              borderRadius: 'var(--radius-md)',
+              borderRadius: 'var(--radius-xl)',
               padding: '12px 24px',
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 'var(--font-weight-medium)',
+              fontSize: '14px',
+              fontWeight: 600,
               cursor: 'pointer',
-              boxShadow: 'var(--shadow-sm)',
-              transition: 'all var(--duration-fast) var(--easing-standard)',
+              transition: 'all 0.15s ease',
             }}
           >
-            Eisenhower Matrix ↗
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            </svg>
+            Priority Matrix
           </button>
         </div>
-      </section>
+      </div>
 
-      {/* Feature Cards Grid */}
+      {/* 4 Glowing Cards in Horizontal Grid */}
       <section
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: 'var(--space-5)',
-        }}
+        className={shellStyles.overviewModulesGrid}
         aria-label="Application Modules"
       >
         {modules.map((m) => (
@@ -266,46 +281,76 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
               background: 'var(--color-bg-elevated)',
               border: '1px solid var(--color-border-default)',
               borderRadius: 'var(--radius-xl)',
-              padding: 'var(--space-6)',
+              padding: '24px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: 'var(--space-4)',
+              gap: '20px',
               cursor: 'pointer',
-              boxShadow: 'var(--shadow-sm)',
-              transition: 'all var(--duration-normal) var(--easing-standard)',
+              boxShadow: 'var(--shadow-md)',
+              transition: 'all 0.2s ease',
               position: 'relative',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = 'var(--color-accent-default)';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              e.currentTarget.style.boxShadow = '0 12px 28px rgba(0, 0, 0, 0.45), 0 0 20px var(--color-accent-glow)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = 'var(--color-border-default)';
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
             }}
           >
             <div>
-              <span
+              <div
                 style={{
-                  fontSize: 'var(--font-size-xs)',
-                  fontWeight: 'var(--font-weight-bold)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  color: m.accent,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '16px',
                 }}
               >
-                {m.title}
-              </span>
+                {/* Rounded Icon Orb */}
+                <div
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 'var(--radius-full)',
+                    background: `color-mix(in srgb, ${m.accent} 18%, transparent)`,
+                    color: m.accent,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {m.icon}
+                </div>
+
+                {/* Badge Tag */}
+                <span
+                  style={{
+                    fontSize: '10px',
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 700,
+                    letterSpacing: '0.04em',
+                    color: m.accent,
+                    background: 'var(--color-bg-surface)',
+                    border: '1px solid var(--color-border-subtle)',
+                    padding: '3px 8px',
+                    borderRadius: 'var(--radius-full)',
+                  }}
+                >
+                  {m.tag}
+                </span>
+              </div>
+
               <h2
                 style={{
-                  fontSize: 'var(--font-size-xl)',
-                  fontWeight: 'var(--font-weight-bold)',
+                  fontSize: '20px',
+                  fontWeight: 700,
                   color: 'var(--color-text-primary)',
-                  marginTop: 'var(--space-2)',
-                  marginBottom: 'var(--space-2)',
+                  margin: '0 0 8px 0',
                   letterSpacing: '-0.02em',
                 }}
               >
@@ -313,9 +358,10 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
               </h2>
               <p
                 style={{
-                  fontSize: 'var(--font-size-sm)',
+                  fontSize: '13px',
                   color: 'var(--color-text-secondary)',
-                  lineHeight: '1.6',
+                  margin: 0,
+                  lineHeight: 1.5,
                 }}
               >
                 {m.desc}
@@ -326,29 +372,29 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 'var(--space-1)',
-                fontSize: 'var(--font-size-sm)',
-                fontWeight: 'var(--font-weight-semibold)',
+                fontSize: '13px',
+                fontWeight: 600,
                 color: 'var(--color-accent-default)',
-                marginTop: 'var(--space-2)',
+                marginTop: '4px',
               }}
             >
-              <span>Explore</span>
-              <span>→</span>
+              <span>View Module →</span>
             </div>
           </div>
         ))}
       </section>
 
-      {/* System Architecture Status (Preserves Test Assertions) */}
+      {/* System Architecture Status (Runagent Rounded Container) */}
       <section
         style={{
-          backgroundColor: 'var(--color-bg-elevated)',
+          background: 'var(--color-bg-elevated)',
           borderRadius: 'var(--radius-xl)',
-          padding: 'var(--space-6)',
+          padding: '24px',
           border: '1px solid var(--color-border-default)',
           boxShadow: 'var(--shadow-sm)',
-          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
         }}
       >
         <div
@@ -356,51 +402,85 @@ function OverviewPage({ onNavigate }: { onNavigate: (path: string) => void }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: 'var(--space-4)',
             borderBottom: '1px solid var(--color-border-subtle)',
-            paddingBottom: 'var(--space-3)',
+            paddingBottom: '16px',
           }}
         >
-          <h2
-            style={{
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 'var(--font-weight-bold)',
-              color: 'var(--color-text-primary)',
-              letterSpacing: '0.03em',
-              textTransform: 'uppercase',
-            }}
-          >
-            System Architecture Status
-          </h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 'var(--radius-full)',
+                background: 'var(--color-success)',
+                boxShadow: '0 0 8px var(--color-success)',
+              }}
+            />
+            <h2
+              style={{
+                fontSize: '13px',
+                fontWeight: 700,
+                color: 'var(--color-text-primary)',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                margin: 0,
+              }}
+            >
+              System Architecture Status
+            </h2>
+          </div>
           <span
             style={{
-              fontSize: 'var(--font-size-xs)',
-              fontWeight: 'var(--font-weight-semibold)',
+              fontSize: '12px',
+              fontWeight: 600,
               color: 'var(--color-success)',
+              background: 'var(--color-success-bg)',
+              padding: '3px 12px',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid var(--color-success-border)',
             }}
           >
-            Verified 100%
+            ✓ Verified 100%
           </span>
         </div>
-        <ul
-          style={{
-            listStylePosition: 'inside',
-            color: 'var(--color-text-secondary)',
-            fontSize: 'var(--font-size-sm)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 'var(--space-2)',
-            lineHeight: '1.6',
-          }}
-        >
-          <li>4 Architectural Zones (App, Features, Shared, Core)</li>
-          <li>Feature Modules Isolated with Public API Barrels</li>
-          <li>Strict Architectural Boundaries Enforced via ESLint</li>
-          <li>Refined Minimalist Design Tokens Active</li>
-          <li>Responsive Desktop Inset Sidebar / Mobile Dock</li>
-          <li>Keyboard Shortcuts: n / g-sequence / ? Active</li>
-          <li>Full PWA &amp; Offline IndexedDB Local Persistence</li>
-        </ul>
+
+        <div className={shellStyles.overviewArchitectureGrid}>
+          {[
+            '4 Architectural Zones (App, Features, Shared, Core)',
+            'Feature Modules Isolated with Public API Barrels',
+            'Strict Architectural Boundaries Enforced via ESLint',
+            'Sleek Warm Obsidian & Golden Sand Palette Active',
+            'Desktop Inset Sidebar + Clean Content Layout',
+            'Keyboard Shortcuts : n / g-sequence / ? Active',
+            'Full PWA & Offline IndexedDB Local Persistence',
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontSize: '13px',
+                color: 'var(--color-text-secondary)',
+                padding: '10px 14px',
+                background: 'var(--color-bg-surface)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--color-border-subtle)',
+              }}
+            >
+              <span
+                style={{
+                  color: 'var(--color-accent-default)',
+                  fontWeight: 800,
+                  fontSize: '14px',
+                }}
+              >
+                ✓
+              </span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
@@ -414,7 +494,6 @@ function AppContent() {
   );
   const [helpOpen, setHelpOpen] = useState(false);
 
-  // Bootstrap storage and hydrate all stores
   useEffect(() => {
     createStorageManager()
       .then(({ manager }) => {
@@ -443,13 +522,11 @@ function AppContent() {
     setCurrentPath(path);
   };
 
-  // Global keyboard shortcuts
   useKeyboardShortcuts({
     onNavigate: navigate,
     onHelpOpen: () => setHelpOpen(true),
   });
 
-  // Determine which page to render
   const renderPage = () => {
     if (
       import.meta.env.DEV &&

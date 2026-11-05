@@ -2,19 +2,20 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 680px;
-  margin: 0 auto;
-  padding: var(--space-8) var(--space-4);
-  gap: var(--space-8);
   width: 100%;
+  box-sizing: border-box;
+  padding: 32px 48px;
+  gap: var(--space-8);
 }
 
 .pageTitle {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-extrabold);
+  font-size: 28px;
+  font-weight: 800;
   color: var(--color-text-primary);
   letter-spacing: -0.03em;
-  margin-bottom: var(--space-1);
+  margin: 0;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .section {
@@ -24,13 +25,13 @@
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-xl);
-  padding: var(--space-6);
+  padding: 24px 28px;
   box-shadow: var(--shadow-sm);
 }
 
 .sectionTitle {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
@@ -53,13 +54,13 @@
 }
 
 .rowLabelText {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-size: 14px;
+  font-weight: 600;
   color: var(--color-text-primary);
 }
 
 .rowLabelDescription {
-  font-size: var(--font-size-xs);
+  font-size: 12px;
   color: var(--color-text-muted);
 }
 
@@ -75,9 +76,9 @@
 .segmentBtn {
   border: none;
   background: transparent;
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
   color: var(--color-text-secondary);
   transition:
@@ -92,7 +93,6 @@
 .segmentBtn.active {
   background: var(--color-accent-default);
   color: var(--color-text-on-accent);
-  font-weight: var(--font-weight-semibold);
 }
 
 .segmentBtn:focus-visible {
@@ -108,13 +108,13 @@
 }
 
 .dataRowTitle {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-size: 14px;
+  font-weight: 600;
   color: var(--color-text-primary);
 }
 
 .dataRowDesc {
-  font-size: var(--font-size-xs);
+  font-size: 12px;
   color: var(--color-text-muted);
   margin-bottom: var(--space-1);
 }
@@ -126,7 +126,7 @@
 .dangerZone {
   border: 1px solid var(--color-quadrant-eliminate-border, #fca5a5);
   border-radius: var(--radius-lg);
-  padding: var(--space-5);
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -134,12 +134,26 @@
 }
 
 .dangerTitle {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  font-weight: 700;
   color: var(--color-error);
 }
 
 .dangerDesc {
-  font-size: var(--font-size-xs);
+  font-size: 12px;
   color: var(--color-text-secondary);
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 20px 16px;
+  }
+
+  .pageTitle {
+    font-size: 22px;
+  }
+
+  .section {
+    padding: 16px;
+  }
 }

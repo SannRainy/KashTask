@@ -1,8 +1,7 @@
 /**
  * AppShell — responsive layout wrapper.
  *
- * Desktop (≥768px): clean floating refined sidebar with nav + settings.
- * Mobile (<768px):  sticky top bar + floating modern pill bottom nav.
+ * Midnight Indigo Aura & Rounded Sleek Layout with top right avatar and status controls.
  */
 import React from 'react';
 import { ThemeToggle } from '@shared/ui/ThemeToggle';
@@ -12,7 +11,7 @@ import styles from './AppShell.module.css';
 export interface NavItem {
   label: string;
   path: string;
-  shortcut?: string;
+  count?: number;
   icon: React.ReactNode;
 }
 
@@ -28,7 +27,7 @@ function IconHome() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -46,13 +45,13 @@ function IconTasks() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M9 6h11M9 12h11M9 18h11" />
-      <path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2" />
+      <polyline points="9 11 12 14 22 4" />
+      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
     </svg>
   );
 }
@@ -63,15 +62,15 @@ function IconMatrix() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <rect x="3" y="3" width="8" height="8" rx="2" />
-      <rect x="13" y="3" width="8" height="8" rx="2" />
-      <rect x="3" y="13" width="8" height="8" rx="2" />
-      <rect x="13" y="13" width="8" height="8" rx="2" />
+      <rect x="3" y="3" width="7" height="7" rx="2" />
+      <rect x="14" y="3" width="7" height="7" rx="2" />
+      <rect x="3" y="14" width="7" height="7" rx="2" />
+      <rect x="14" y="14" width="7" height="7" rx="2" />
     </svg>
   );
 }
@@ -82,13 +81,12 @@ function IconHabits() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-      <circle cx="12" cy="12" r="4" />
+      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
     </svg>
   );
 }
@@ -99,13 +97,14 @@ function IconStats() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M18 20V10M12 20V4M6 20v-6" />
-      <path d="M3 20h18" />
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
     </svg>
   );
 }
@@ -116,7 +115,7 @@ function IconSettings() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -127,12 +126,31 @@ function IconSettings() {
   );
 }
 
+function IconBell() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      width="18"
+      height="18"
+      aria-hidden="true"
+    >
+      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 01-3.46 0" />
+    </svg>
+  );
+}
+
 const PRIMARY_NAV: NavItem[] = [
-  { label: 'Overview', path: '/', icon: <IconHome />, shortcut: 'Esc' },
-  { label: 'Tasks', path: '/tasks', icon: <IconTasks />, shortcut: 'g t' },
-  { label: 'Matrix', path: '/matrix', icon: <IconMatrix />, shortcut: 'g m' },
-  { label: 'Habits', path: '/habits', icon: <IconHabits />, shortcut: 'g h' },
-  { label: 'Stats', path: '/stats', icon: <IconStats />, shortcut: 'g s' },
+  { label: 'Overview', path: '/', icon: <IconHome /> },
+  { label: 'Tasks', path: '/tasks', icon: <IconTasks />, count: 9 },
+  { label: 'Matrix', path: '/matrix', icon: <IconMatrix />, count: 9 },
+  { label: 'Habits', path: '/habits', icon: <IconHabits />, count: 9 },
+  { label: 'Stats', path: '/stats', icon: <IconStats />, count: 9 },
 ];
 
 export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
@@ -148,10 +166,11 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
 
   return (
     <div className={styles.shell}>
-      {/* Subtle modern ambient artistic background layer */}
-      <div className={styles.ambientBackdrop} aria-hidden="true" />
+      {/* Decorative Aura Gradients in Top-Right & Bottom-Left */}
+      <div className={styles.ambientGlowTopRight} aria-hidden="true" />
+      <div className={styles.ambientGlowBottomLeft} aria-hidden="true" />
 
-      {/* Desktop Sidebar */}
+      {/* Desktop Inset Sidebar */}
       <aside className={styles.sidebar} aria-label="Main navigation">
         <div className={styles.sidebarHeader}>
           <a
@@ -182,8 +201,8 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
                 <span className={styles.navIcon}>{item.icon}</span>
                 <span>{item.label}</span>
               </div>
-              {item.shortcut && (
-                <span className={styles.shortcutBadge}>{item.shortcut}</span>
+              {item.count !== undefined && (
+                <span className={styles.countPill}>{item.count}</span>
               )}
             </a>
           ))}
@@ -233,6 +252,41 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
 
       {/* Main content area */}
       <div className={styles.main}>
+        {/* Desktop Top Header Bar with Avatar & Actions */}
+        <div className={styles.mainTopBar} role="toolbar" aria-label="Quick actions">
+          <div className={styles.topBarActions}>
+            <ThemeToggle
+              mode={mode}
+              resolvedTheme={resolvedTheme}
+              onModeChange={setMode}
+            />
+            <button
+              type="button"
+              className={styles.iconActionBtn}
+              aria-label="Notifications"
+            >
+              <IconBell />
+            </button>
+            <div className={styles.avatarPill} title="Profile">
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(135deg, #a855f7, #6366f1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                }}
+              >
+                KT
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Mobile top bar */}
         <header className={styles.topBar}>
           <a
@@ -254,11 +308,9 @@ export function AppShell({ currentPath, onNavigate, children }: AppShellProps) {
               href="/settings"
               onClick={handleNav('/settings')}
               aria-label="Settings"
-              className={styles.mobileSettingsBtn}
+              className={styles.iconActionBtn}
             >
-              <span className={styles.mobileSettingsIcon}>
-                <IconSettings />
-              </span>
+              <IconSettings />
             </a>
           </div>
         </header>

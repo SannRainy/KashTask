@@ -76,7 +76,7 @@
 }
 
 .bar {
-  fill: #8b6ff9;
+  fill: var(--color-accent-default);
   rx: 3px;
   transition: all var(--duration-fast) var(--easing-standard);
   cursor: pointer;
@@ -84,8 +84,8 @@
 
 .bar:hover,
 .bar:focus-visible {
-  fill: #a792fb;
-  filter: drop-shadow(0 0 8px rgba(139, 111, 249, 0.4));
+  fill: var(--color-accent-hover);
+  filter: drop-shadow(0 0 8px var(--color-accent-glow));
   outline: none;
 }
 

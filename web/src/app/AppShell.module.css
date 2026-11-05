@@ -3,35 +3,34 @@
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  background-color: var(--color-bg-primary);
 }
 
-/* Subtle modern artistic backdrop — soft texture blend */
-.ambientBackdrop {
+/* Ambient gradient decorative orbs */
+.ambientGlowTopRight {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 100vw;
-  height: 100vh;
+  top: -120px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, var(--color-accent-subtle-hover) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
-  background-size: cover;
-  background-position: center right;
-  background-repeat: no-repeat;
-  transition: opacity var(--duration-slow) var(--easing-standard);
-  filter: contrast(105%);
+  filter: blur(40px);
 }
 
-[data-theme='dark'] .ambientBackdrop {
-  background-image: url('/bg/Bg2.jpg');
-  opacity: 0.08;
-  mix-blend-mode: screen;
-}
-
-:root[data-theme='light'] .ambientBackdrop,
-:root:not([data-theme='dark']) .ambientBackdrop {
-  background-image: url('/bg/Bg1.jpg');
-  opacity: 0.12;
-  mix-blend-mode: multiply;
+.ambientGlowBottomLeft {
+  position: fixed;
+  bottom: -150px;
+  left: -100px;
+  width: 450px;
+  height: 450px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, var(--color-accent-subtle) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
 }
 
 /* ── Desktop Modern Inset Sidebar ── */
@@ -40,9 +39,7 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--color-bg-secondary);
   border-right: 1px solid var(--color-border-default);
   position: sticky;
   top: 0;
@@ -55,8 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-6) var(--space-5) var(--space-5);
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 24px 20px 20px;
 }
 
 .brandLink {
@@ -67,17 +63,17 @@
 }
 
 .brandLogoMark {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-accent-default), #4338ca);
+  background: linear-gradient(135deg, var(--color-accent-default), #998358);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--color-text-on-accent);
   font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-base);
-  box-shadow: 0 4px 14px var(--color-accent-glow);
+  font-size: 18px;
+  box-shadow: 0 4px 16px var(--color-accent-glow);
   letter-spacing: -0.04em;
   flex-shrink: 0;
 }
@@ -85,49 +81,48 @@
 .brandTextGroup {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 .logo {
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-extrabold);
   color: var(--color-text-primary);
   letter-spacing: -0.03em;
   line-height: 1.15;
 }
 
 .brandTagline {
-  font-size: var(--font-size-2xs);
+  font-size: 11px;
   color: var(--color-text-muted);
   font-weight: var(--font-weight-medium);
-  letter-spacing: 0.02em;
 }
 
 .sidebarNav {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: var(--space-5) var(--space-3);
-  gap: 2px;
+  padding: 16px 14px;
+  gap: 4px;
   overflow-y: auto;
 }
 
 .navSectionLabel {
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-semibold);
+  font-size: 10px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
-  padding: var(--space-2) var(--space-3) var(--space-2);
+  padding: 10px 14px 6px;
 }
 
 .navItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px var(--space-3);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
+  padding: 10px 14px;
+  border-radius: var(--radius-xl);
+  font-size: 14px;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -143,35 +138,24 @@
 .navItemContent {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 12px;
 }
 
 .navItem:hover {
-  background: var(--color-accent-subtle);
+  background: var(--color-bg-surface);
   color: var(--color-text-primary);
 }
 
 .navItem.active {
-  background: var(--color-accent-subtle-hover);
-  color: var(--color-accent-default);
-  font-weight: var(--font-weight-semibold);
-  border-color: var(--color-accent-subtle);
+  background: linear-gradient(135deg, var(--color-accent-default), #998358);
+  color: var(--color-text-on-accent);
+  font-weight: 600;
+  box-shadow: 0 4px 16px var(--color-accent-glow);
 }
 
-.navItem.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 3px;
-  border-radius: var(--radius-full);
-  background: var(--color-accent-default);
-}
-
-.navItem:focus-visible {
-  outline: 2px solid var(--color-accent-default);
-  outline-offset: 1px;
+.navItem.active .navIcon {
+  color: var(--color-text-on-accent);
+  opacity: 1;
 }
 
 .navIcon {
@@ -179,34 +163,38 @@
   height: 18px;
   flex-shrink: 0;
   opacity: 0.75;
-  transition: opacity var(--duration-fast) var(--easing-standard);
+  transition: all var(--duration-fast) var(--easing-standard);
 }
 
-.navItem:hover .navIcon,
-.navItem.active .navIcon {
+.navItem:hover .navIcon {
   opacity: 1;
 }
 
-.shortcutBadge {
-  font-family: var(--font-mono);
+.countPill {
   font-size: 11px;
-  padding: 2px 6px;
-  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
   background: var(--color-bg-surface);
-  border: 1px solid var(--color-border-subtle);
   color: var(--color-text-muted);
 }
 
+.navItem.active .countPill {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--color-text-on-accent);
+}
+
 .sidebarFooter {
-  padding: var(--space-3) var(--space-3) var(--space-5);
+  padding: 16px 14px 20px;
   border-top: 1px solid var(--color-border-subtle);
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 2px;
 }
 
 .themeToggleWrapper {
-  padding-top: var(--space-2);
+  padding-top: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -218,8 +206,61 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
   position: relative;
   z-index: 1;
+}
+
+/* ── Top Header Bar on Main Area ── */
+.mainTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 18px 48px;
+  gap: 16px;
+  z-index: 2;
+}
+
+.topBarActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.iconActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.iconActionBtn:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+}
+
+.avatarPill {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-accent-default);
+  overflow: hidden;
+  box-shadow: 0 0 10px var(--color-accent-glow);
+  cursor: pointer;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ── Mobile top bar ── */
@@ -228,9 +269,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-3) var(--space-4);
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--color-bg-secondary);
   border-bottom: 1px solid var(--color-border-default);
   position: sticky;
   top: 0;
@@ -245,17 +284,17 @@
 }
 
 .brandLogoMarkSmall {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--color-accent-default), #4338ca);
+  background: linear-gradient(135deg, var(--color-accent-default), #998358);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--color-text-on-accent);
   font-weight: var(--font-weight-extrabold);
-  font-size: 13px;
-  letter-spacing: -0.04em;
+  font-size: 14px;
+  box-shadow: 0 2px 8px var(--color-accent-glow);
   flex-shrink: 0;
 }
 
@@ -266,27 +305,6 @@
   letter-spacing: -0.02em;
 }
 
-.topBarActions {
-  display: flex;
-  gap: var(--space-2);
-  align-items: center;
-}
-
-.mobileSettingsBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-secondary);
-  padding: var(--space-1);
-  border-radius: var(--radius-sm);
-}
-
-.mobileSettingsIcon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-}
-
 /* ── Mobile Floating Pill Bottom Nav ── */
 .bottomNav {
   display: none;
@@ -294,9 +312,7 @@
   bottom: 16px;
   left: 16px;
   right: 16px;
-  background: var(--glass-bg-elevated);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--color-bg-elevated);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-xl);
@@ -331,13 +347,9 @@
 }
 
 .bottomNavItem.active {
-  color: var(--color-accent-default);
-  background: var(--color-accent-subtle);
+  color: var(--color-text-on-accent);
+  background: var(--color-accent-default);
   font-weight: var(--font-weight-semibold);
-}
-
-.bottomNavItem:focus-visible {
-  outline: 2px solid var(--color-accent-default);
 }
 
 .bottomNavIcon {
@@ -351,11 +363,49 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+/* ── Overview Dashboard Grids ── */
+.overviewModulesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.overviewArchitectureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .overviewModulesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .overviewArchitectureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .overviewModulesGrid {
+    grid-template-columns: 1fr;
+  }
+  .overviewArchitectureGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Responsive breakpoint (<768px) ── */
 @media (max-width: 767px) {
   .sidebar {
+    display: none;
+  }
+
+  .mainTopBar {
     display: none;
   }
 

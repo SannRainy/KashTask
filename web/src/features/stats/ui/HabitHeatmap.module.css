@@ -7,6 +7,7 @@
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .header {
@@ -26,7 +27,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: var(--space-2);
-  max-width: 500px;
+  width: 100%;
 }
 
 .dayHeader {
@@ -57,7 +58,7 @@
 
 .cell:hover,
 .cell:focus-visible {
-  transform: scale(1.1);
+  transform: scale(1.08);
   outline: 2px solid var(--color-accent-default);
   z-index: 1;
 }
@@ -67,58 +68,58 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* Heatmap intensity levels */
+/* Heatmap intensity levels with warm gold/bronze tint */
 .level0 {
   background-color: var(--color-bg-surface);
   color: var(--color-text-muted);
 }
 
 .level1 {
-  background-color: #d1fae5;
-  color: #065f46;
-  border-color: #a7f3d0;
+  background-color: rgba(200, 180, 138, 0.2);
+  color: #c2baa9;
+  border-color: rgba(200, 180, 138, 0.3);
 }
 
 .level2 {
-  background-color: #6ee7b7;
-  color: #064e3b;
-  border-color: #34d399;
+  background-color: rgba(200, 180, 138, 0.4);
+  color: #F5F0E6;
+  border-color: rgba(200, 180, 138, 0.5);
 }
 
 .level3 {
-  background-color: #10b981;
-  color: white;
-  border-color: #059669;
+  background-color: rgba(200, 180, 138, 0.7);
+  color: #131210;
+  border-color: #C8B48A;
 }
 
 .level4 {
-  background-color: #047857;
-  color: white;
-  border-color: #065f46;
+  background-color: #C8B48A;
+  color: #131210;
+  border-color: #e3d8be;
 }
 
-:root[data-theme='dark'] .level1 {
-  background-color: rgba(16, 185, 129, 0.2);
-  color: #6ee7b7;
-  border-color: rgba(16, 185, 129, 0.3);
+:root[data-theme='light'] .level1 {
+  background-color: #f7f2e7;
+  color: #8c7b64;
+  border-color: #e6dac1;
 }
 
-:root[data-theme='dark'] .level2 {
-  background-color: rgba(16, 185, 129, 0.4);
-  color: #a7f3d0;
-  border-color: rgba(16, 185, 129, 0.5);
+:root[data-theme='light'] .level2 {
+  background-color: #e6dac1;
+  color: #4a4133;
+  border-color: #C8B48A;
 }
 
-:root[data-theme='dark'] .level3 {
-  background-color: rgba(16, 185, 129, 0.7);
-  color: white;
-  border-color: #10b981;
+:root[data-theme='light'] .level3 {
+  background-color: #C8B48A;
+  color: #1a1712;
+  border-color: #b59f72;
 }
 
-:root[data-theme='dark'] .level4 {
-  background-color: #10b981;
-  color: var(--color-neutral-950);
-  border-color: #34d399;
+:root[data-theme='light'] .level4 {
+  background-color: #8A744C;
+  color: #ffffff;
+  border-color: #75623f;
 }
 
 .footer {

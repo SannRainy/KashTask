@@ -1,11 +1,12 @@
 /*
- * KashTask Design Tokens
- * Ultra-Modern Minimalist Dark & Light Theme (Inspired by Runagent / Linear / Dribbble)
- * Precision micro-borders, deep obsidian matte surfaces, glowing accents, perfect hierarchy.
+ * KashTask Elite Design Tokens
+ * Bespoke Luxury Palette:
+ * Dark: Warm Golden Sand / Bronze Accents (#C8B48A) on rich deep espresso-obsidian canvas (#131210 / #1a1815)
+ * Light: Warm Alabaster Cream (#F5F0E6) with refined Bronze/Caramel (#8A744C / #C8B48A)
  */
 
 :root {
-  /* ── Spacing scale ── */
+  /* ── Spacing ── */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -17,56 +18,49 @@
   --space-12: 48px;
   --space-16: 64px;
 
-  /* ── Precision Border radius ── */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  /* ── Ultra-smooth Rounded Curves ── */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
   --radius-full: 9999px;
 
-  /* ── Typography — font families ── */
-  --font-sans:
-    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    sans-serif;
-  --font-mono:
-    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    monospace;
+  /* ── Typography ── */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
-  /* ── Typography — font sizes ── */
   --font-size-2xs: 0.6875rem; /* 11px */
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
   --font-size-base: 1rem;     /* 16px */
   --font-size-lg: 1.125rem;   /* 18px */
   --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 2rem;      /* 32px */
-  --font-size-4xl: 2.75rem;   /* 44px */
+  --font-size-2xl: 1.625rem;  /* 26px */
+  --font-size-3xl: 2.25rem;   /* 36px */
+  --font-size-4xl: 3rem;      /* 48px */
 
-  /* ── Typography — font weights ── */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
-  /* ── Typography — line heights ── */
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.65;
 
-  /* ── Motion & transitions ── */
-  --duration-fast: 140ms;
-  --duration-normal: 220ms;
-  --duration-slow: 350ms;
+  /* ── Motion ── */
+  --duration-fast: 160ms;
+  --duration-normal: 260ms;
+  --duration-slow: 400ms;
   --easing-standard: cubic-bezier(0.16, 1, 0.3, 1);
   --easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
   --easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
   --ease-default: var(--easing-standard);
 
-  /* ── Z-index scale ── */
+  /* ── Z-index ── */
   --z-dropdown: 100;
   --z-sticky: 200;
   --z-overlay: 300;
@@ -75,62 +69,65 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Default & Dark Theme: Pure Obsidian Matte Canvas (#0b0c0e) with Soft Violet/Indigo Accent
+   Dark Theme (Default): Deep Warm Espresso Canvas with Golden Sand #C8B48A
    ────────────────────────────────────────────────────────────────────────── */
 :root,
 :root[data-theme='dark'] {
-  --color-neutral-50: #07080a;
-  --color-neutral-100: #0e1013;
-  --color-neutral-200: #14171c;
-  --color-neutral-300: #1c2027;
-  --color-neutral-400: #2b313c;
-  --color-neutral-500: #525c6e;
-  --color-neutral-600: #8895aa;
-  --color-neutral-700: #b5c0d0;
-  --color-neutral-800: #e2e8f0;
-  --color-neutral-900: #f1f5f9;
+  --color-neutral-50: #0d0c0a;
+  --color-neutral-100: #141310;
+  --color-neutral-200: #1b1916;
+  --color-neutral-300: #25221e;
+  --color-neutral-400: #36322b;
+  --color-neutral-500: #696256;
+  --color-neutral-600: #999080;
+  --color-neutral-700: #c2baa9;
+  --color-neutral-800: #e2ddd4;
+  --color-neutral-900: #f5f2eb;
   --color-neutral-950: #ffffff;
 
-  /* Accent: Neon Violet / Indigo with vibrant glow */
-  --color-accent-50: #1a153b;
-  --color-accent-100: #291e60;
-  --color-accent-200: #3c2a91;
-  --color-accent-300: #553cc7;
-  --color-accent-400: #7053f3;
-  --color-accent-500: #8b6ff9;
-  --color-accent-600: #a792fb;
-  --color-accent-700: #c4b5fd;
-  --color-accent-800: #ddd6fe;
-  --color-accent-900: #f5f3ff;
-  --color-accent-glow: rgba(139, 111, 249, 0.3);
+  /* Warm Golden Sand Accent (#C8B48A) */
+  --color-accent-50: #221d15;
+  --color-accent-100: #362f22;
+  --color-accent-200: #554934;
+  --color-accent-300: #7e6d4c;
+  --color-accent-400: #aa9568;
+  --color-accent-500: #C8B48A;
+  --color-accent-600: #d6c6a4;
+  --color-accent-700: #e3d8be;
+  --color-accent-800: #efe9dc;
+  --color-accent-900: #f9f7f2;
+  --color-accent-glow: rgba(200, 180, 138, 0.35);
 
-  /* Surfaces & canvas */
-  --bg-app-gradient: radial-gradient(circle at 50% 0%, #151821 0%, #0b0c0e 70%);
-  --color-bg-primary: #0b0c0e;
-  --color-bg-secondary: #121419;
-  --color-bg-surface: #14171d;
-  --color-bg-elevated: #161922;
-  --color-bg-overlay: rgba(5, 6, 8, 0.75);
+  /* Surfaces & Canvas with Warm Golden Ambient Glow */
+  --bg-app-gradient:
+    radial-gradient(ellipse 70% 55% at 95% 8%, rgba(200, 180, 138, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 5% 95%, rgba(138, 116, 76, 0.12) 0%, transparent 60%),
+    #131210;
+  --color-bg-primary: #131210;
+  --color-bg-secondary: #1a1815;
+  --color-bg-surface: #201e19;
+  --color-bg-elevated: #24211b;
+  --color-bg-overlay: rgba(10, 9, 8, 0.82);
 
-  /* Glassmorphism tokens */
-  --glass-bg: rgba(18, 20, 26, 0.85);
-  --glass-bg-elevated: rgba(22, 25, 34, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-highlight: rgba(255, 255, 255, 0.16);
-  --glass-blur: blur(20px);
-  --card-bg: #13161d;
-  --card-hover-bg: #181c25;
+  /* Glassmorphism & Soft Card Containers */
+  --glass-bg: rgba(26, 24, 21, 0.85);
+  --glass-bg-elevated: rgba(36, 33, 27, 0.92);
+  --glass-border: rgba(200, 180, 138, 0.12);
+  --glass-border-highlight: rgba(200, 180, 138, 0.25);
+  --glass-blur: blur(24px);
+  --card-bg: #201e19;
+  --card-hover-bg: #27241e;
 
-  /* Quadrant colors: Clean glowing indicator tones */
+  /* Quadrant colors with warm harmony */
   --color-quadrant-do: #f43f5e;
   --color-quadrant-do-bg: rgba(244, 63, 94, 0.12);
   --color-quadrant-do-border: rgba(244, 63, 94, 0.3);
   --color-quadrant-do-text: #fda4af;
 
-  --color-quadrant-schedule: #f59e0b;
-  --color-quadrant-schedule-bg: rgba(245, 158, 11, 0.12);
-  --color-quadrant-schedule-border: rgba(245, 158, 11, 0.3);
-  --color-quadrant-schedule-text: #fde68a;
+  --color-quadrant-schedule: #C8B48A;
+  --color-quadrant-schedule-bg: rgba(200, 180, 138, 0.12);
+  --color-quadrant-schedule-border: rgba(200, 180, 138, 0.32);
+  --color-quadrant-schedule-text: #e3d8be;
 
   --color-quadrant-delegate: #38bdf8;
   --color-quadrant-delegate-bg: rgba(56, 189, 248, 0.12);
@@ -143,32 +140,32 @@
   --color-quadrant-eliminate-text: #cbd5e1;
 
   /* Typography */
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #626f84;
-  --color-text-inverse: #0b0c0e;
-  --color-text-on-accent: #ffffff;
+  --color-text-primary: #F5F0E6;
+  --color-text-secondary: #c2baa9;
+  --color-text-muted: #807767;
+  --color-text-inverse: #131210;
+  --color-text-on-accent: #131210;
 
   /* Borders */
-  --color-border-default: rgba(255, 255, 255, 0.08);
-  --color-border-subtle: rgba(255, 255, 255, 0.04);
-  --color-border-strong: rgba(255, 255, 255, 0.16);
-  --color-border-focus: var(--color-accent-400);
+  --color-border-default: rgba(200, 180, 138, 0.14);
+  --color-border-subtle: rgba(200, 180, 138, 0.07);
+  --color-border-strong: rgba(200, 180, 138, 0.28);
+  --color-border-focus: var(--color-accent-500);
 
   /* Interactive accent */
-  --color-accent-default: #8b6ff9;
-  --color-accent-hover: #9d85fa;
-  --color-accent-active: #7053f3;
-  --color-accent-subtle: rgba(139, 111, 249, 0.14);
-  --color-accent-subtle-hover: rgba(139, 111, 249, 0.22);
+  --color-accent-default: #C8B48A;
+  --color-accent-hover: #d6c6a4;
+  --color-accent-active: #aa9568;
+  --color-accent-subtle: rgba(200, 180, 138, 0.14);
+  --color-accent-subtle-hover: rgba(200, 180, 138, 0.24);
 
   /* Status / feedback */
   --color-success: #10b981;
   --color-success-bg: rgba(16, 185, 129, 0.14);
   --color-success-border: rgba(16, 185, 129, 0.3);
-  --color-warning: #f59e0b;
-  --color-warning-bg: rgba(245, 158, 11, 0.14);
-  --color-warning-border: rgba(245, 158, 11, 0.3);
+  --color-warning: #eab308;
+  --color-warning-bg: rgba(234, 179, 8, 0.14);
+  --color-warning-border: rgba(234, 179, 8, 0.3);
   --color-error: #f43f5e;
   --color-error-bg: rgba(244, 63, 94, 0.14);
   --color-error-border: rgba(244, 63, 94, 0.3);
@@ -176,72 +173,72 @@
   --color-info-bg: rgba(56, 189, 248, 0.14);
   --color-info-border: rgba(56, 189, 248, 0.3);
 
-  /* Precision shadows & inner card highlights */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
-  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.85);
-  --shadow-xl: 0 24px 60px -10px rgba(0, 0, 0, 0.95);
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px -2px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 14px 36px -4px rgba(0, 0, 0, 0.75);
+  --shadow-xl: 0 28px 64px -10px rgba(0, 0, 0, 0.85);
   --shadow-glow: 0 0 24px var(--color-accent-glow);
 
-  --theme-color: #0b0c0e;
+  --theme-color: #131210;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Light Theme: Clean high-end SaaS Editorial Palette
+   Light Theme: Warm Alabaster Cream (#F5F0E6) with Refined Bronze (#8A744C / #C8B48A)
    ────────────────────────────────────────────────────────────────────────── */
 :root[data-theme='light'] {
-  --color-neutral-50: #fcfcfd;
-  --color-neutral-100: #f4f5f8;
-  --color-neutral-200: #e9ecf2;
-  --color-neutral-300: #d8deeb;
-  --color-neutral-400: #9da8be;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
-  --color-neutral-950: #020617;
+  --color-neutral-50: #fbf9f4;
+  --color-neutral-100: #F5F0E6;
+  --color-neutral-200: #eae3d3;
+  --color-neutral-300: #ded3bf;
+  --color-neutral-400: #baa991;
+  --color-neutral-500: #8c7b64;
+  --color-neutral-600: #665948;
+  --color-neutral-700: #4a4133;
+  --color-neutral-800: #2e281f;
+  --color-neutral-900: #1a1712;
+  --color-neutral-950: #0a0907;
 
-  /* Accent: Clean Electric Violet */
-  --color-accent-50: #f5f3ff;
-  --color-accent-100: #ede9fe;
-  --color-accent-200: #ddd6fe;
-  --color-accent-300: #c4b5fd;
-  --color-accent-400: #a78bfa;
-  --color-accent-500: #7c3aed;
-  --color-accent-600: #6d28d9;
-  --color-accent-700: #5b21b6;
-  --color-accent-800: #4c1d95;
-  --color-accent-900: #2e1065;
-  --color-accent-glow: rgba(124, 58, 237, 0.2);
+  /* Accent: Deep Warm Bronze on Light Mode with high contrast */
+  --color-accent-50: #faf7f0;
+  --color-accent-100: #f3ecdb;
+  --color-accent-200: #e6dac1;
+  --color-accent-300: #C8B48A;
+  --color-accent-400: #b59f72;
+  --color-accent-500: #8A744C;
+  --color-accent-600: #75623f;
+  --color-accent-700: #5f4e31;
+  --color-accent-800: #473a24;
+  --color-accent-900: #302617;
+  --color-accent-glow: rgba(138, 116, 76, 0.25);
 
-  /* Surfaces & canvas */
-  --bg-app-gradient: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-  --color-bg-primary: #f8fafc;
-  --color-bg-secondary: #f1f5f9;
+  --bg-app-gradient:
+    radial-gradient(ellipse 65% 50% at 90% 10%, rgba(200, 180, 138, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 90%, rgba(138, 116, 76, 0.12) 0%, transparent 60%),
+    #F5F0E6;
+  --color-bg-primary: #F5F0E6;
+  --color-bg-secondary: #eee7d8;
   --color-bg-surface: #ffffff;
   --color-bg-elevated: #ffffff;
-  --color-bg-overlay: rgba(15, 23, 42, 0.4);
+  --color-bg-overlay: rgba(26, 23, 18, 0.45);
 
-  /* Glassmorphism tokens */
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-bg-elevated: rgba(255, 255, 255, 0.95);
-  --glass-border: rgba(15, 23, 42, 0.08);
-  --glass-border-highlight: rgba(15, 23, 42, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.96);
+  --glass-border: rgba(138, 116, 76, 0.16);
+  --glass-border-highlight: rgba(138, 116, 76, 0.28);
   --glass-blur: blur(20px);
   --card-bg: #ffffff;
-  --card-hover-bg: #fafbfc;
+  --card-hover-bg: #faf7f0;
 
-  /* Quadrant colors */
   --color-quadrant-do: #e11d48;
   --color-quadrant-do-bg: rgba(225, 29, 72, 0.06);
   --color-quadrant-do-border: rgba(225, 29, 72, 0.2);
   --color-quadrant-do-text: #9f1239;
 
-  --color-quadrant-schedule: #d97706;
-  --color-quadrant-schedule-bg: rgba(217, 119, 6, 0.08);
-  --color-quadrant-schedule-border: rgba(217, 119, 6, 0.22);
-  --color-quadrant-schedule-text: #92400e;
+  --color-quadrant-schedule: #b57a07;
+  --color-quadrant-schedule-bg: rgba(181, 122, 7, 0.08);
+  --color-quadrant-schedule-border: rgba(181, 122, 7, 0.24);
+  --color-quadrant-schedule-text: #784f03;
 
   --color-quadrant-delegate: #0284c7;
   --color-quadrant-delegate-bg: rgba(2, 132, 199, 0.07);
@@ -253,31 +250,27 @@
   --color-quadrant-eliminate-border: rgba(100, 116, 139, 0.18);
   --color-quadrant-eliminate-text: #334155;
 
-  /* Typography */
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #8292a8;
+  --color-text-primary: #1a1712;
+  --color-text-secondary: #574b3a;
+  --color-text-muted: #857560;
   --color-text-inverse: #ffffff;
   --color-text-on-accent: #ffffff;
 
-  /* Borders */
-  --color-border-default: #e2e8f0;
-  --color-border-subtle: #f1f5f9;
-  --color-border-strong: #cbd5e1;
+  --color-border-default: #dfd4c0;
+  --color-border-subtle: #eae1d1;
+  --color-border-strong: #c2b297;
   --color-border-focus: var(--color-accent-500);
 
-  /* Interactive accent */
-  --color-accent-default: #7c3aed;
-  --color-accent-hover: #6d28d9;
-  --color-accent-active: #5b21b6;
-  --color-accent-subtle: rgba(124, 58, 237, 0.08);
-  --color-accent-subtle-hover: rgba(124, 58, 237, 0.14);
+  --color-accent-default: #8A744C;
+  --color-accent-hover: #75623f;
+  --color-accent-active: #5f4e31;
+  --color-accent-subtle: rgba(200, 180, 138, 0.2);
+  --color-accent-subtle-hover: rgba(200, 180, 138, 0.35);
 
-  /* Status / feedback */
   --color-success: #10b981;
   --color-success-bg: #ecfdf5;
   --color-success-border: #a7f3d0;
-  --color-warning: #f59e0b;
+  --color-warning: #b57a07;
   --color-warning-bg: #fffbeb;
   --color-warning-border: #fde68a;
   --color-error: #ef4444;
@@ -287,11 +280,11 @@
   --color-info-bg: #f0f9ff;
   --color-info-border: #bae6fd;
 
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.08);
-  --shadow-xl: 0 24px 48px -12px rgba(15, 23, 42, 0.12);
+  --shadow-sm: 0 1px 3px rgba(35, 30, 22, 0.06);
+  --shadow-md: 0 4px 16px -2px rgba(35, 30, 22, 0.08);
+  --shadow-lg: 0 12px 30px -4px rgba(35, 30, 22, 0.12);
+  --shadow-xl: 0 24px 50px -12px rgba(35, 30, 22, 0.16);
   --shadow-glow: 0 0 20px var(--color-accent-glow);
 
-  --theme-color: #f8fafc;
+  --theme-color: #F5F0E6;
 }
